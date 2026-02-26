@@ -1,0 +1,351 @@
+{% extends "base.html" %}
+
+{% block title %}{{ topic.title }} - DSA Master{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-4">
+    <nav aria-label="breadcrumb" class="mb-4 px-2">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item active">{{ topic.title }}</li>
+        </ol>
+    </nav>
+
+    <div class="row g-4">
+        <!-- LEFT HALF: Topic Content -->
+        <div class="col-lg-6" id="topic-section">
+            <div class="topic-content-wrapper">
+                <h1 class="display-5 fw-bold mb-3">{{ topic.icon }} {{ topic.title }}</h1>
+                <p class="lead text-muted mb-4">{{ topic.description }}</p>
+
+                {% for subtopic in topic.subtopics %}
+                <div class="subtopic-section mb-4" id="subtopic-{{ loop.index }}">
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0">{{ subtopic.name }}</h5>
+                            <button class="btn btn-sm btn-light" onclick="askAI('{{ subtopic.name }}', '{{ topic.title }}')">
+                                🤖 Ask AI
+                            </button>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="video-container mb-3">
+                                        <iframe 
+                                            src="{{ subtopic.video }}" 
+                                            frameborder="0" 
+                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                            allowfullscreen>
+                                        </iframe>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <h6 class="fw-bold mb-3">Key Concepts:</h6>
+                                    <ul class="list-group list-group-flush">
+                                        {% for concept in subtopic.concepts %}
+                                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                                            {{ concept }}
+                                            <button class="btn btn-sm btn-outline-primary" onclick="explainConcept('{{ concept }}')">
+                                                Explain
+                                            </button>
+                                        </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- RIGHT HALF: AI Assistant (Top) + Code Helper (Bottom) -->
+        <div class="col-lg-6" id="sidebar-section">
+            <div class="sticky-sidebar" id="ai-sidebar">
+                <!-- AI Assistant - Top Half -->
+                <div class="card border-0 shadow-sm mb-4" id="ai-assistant-card">
+                    <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">🤖 AI Learning Assistant</h5>
+                        <button class="btn btn-sm btn-outline-light" onclick="toggleAIFullscreen()" title="Toggle Full Screen">
+                            <span id="fullscreen-icon">⛶</span>
+                        </button>
+                    </div>
+                    <div class="card-body d-flex flex-column" id="ai-assistant-body">
+                        <div id="ai-chat" class="ai-chat-container mb-3 flex-grow-1">
+                            <div class="text-muted text-center py-3">
+                                Click "Ask AI" or "Explain" on any concept to get started
+                            </div>
+                        </div>
+                        <div class="input-group mt-auto">
+                            <select class="form-select" id="difficulty-level" style="max-width: 120px;">
+                                <option value="beginner">Beginner</option>
+                                <option value="intermediate">Intermediate</option>
+                                <option value="advanced">Advanced</option>
+                            </select>
+                            <button class="btn btn-primary" onclick="clearChat()">Clear</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Code Helper - Bottom Half -->
+                <div class="card border-0 shadow-sm" id="code-helper-card">
+                    <div class="card-header bg-success text-white">
+                        <h5 class="mb-0">💻 Code Helper</h5>
+                    </div>
+                    <div class="card-body">
+                        <textarea class="form-control mb-2" id="code-input" rows="6" placeholder="Paste your code here..."></textarea>
+                        <input type="text" class="form-control mb-2" id="code-issue" placeholder="What issue are you facing?">
+                        <button class="btn btn-success w-100" onclick="analyzeCode()">Analyze Code</button>
+                        <div id="code-analysis" class="mt-3"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- AI Quiz Section - Full Width Below -->
+    <div class="quiz-section mt-5">
+        <div class="card border-0 shadow-lg overflow-hidden">
+            <div class="card-header bg-primary text-white p-4">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h3 class="mb-0">🤖 AI-Generated Quiz</h3>
+                        <p class="mb-0 text-white-50">Unlimited unique questions powered by Ai</p>
+                    </div>
+                    <div class="fs-1">🎯</div>
+                </div>
+            </div>
+            <div class="card-body p-5 text-center">
+                {% if quiz_score %}
+                    <div class="mb-4">
+                        <p class="text-muted mb-2">Your Best Score</p>
+                        <div class="display-3 fw-bold text-success mb-2">{{ quiz_score.score }}%</div>
+                        <div class="mb-3">
+                            {% if quiz_score.passed %}
+                                <span class="badge bg-success fs-6">✓ Passed</span>
+                            {% else %}
+                                <span class="badge bg-warning fs-6">Keep Practicing</span>
+                            {% endif %}
+                            <span class="badge bg-info fs-6">{{ quiz_score.difficulty|title }}</span>
+                        </div>
+                        <p class="text-muted small">Last attempt: {{ quiz_score.last_attempt[:10] }}</p>
+                    </div>
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                        <a href="/generate-quiz/{{ topic.id }}" class="btn btn-primary btn-lg">
+                            🔄 Generate New Quiz
+                        </a>
+                        <a href="/quiz/{{ topic.id }}" class="btn btn-outline-primary btn-lg">
+                            Retake Similar
+                        </a>
+                    </div>
+                {% else %}
+                    <div class="mb-4">
+                        <div class="feature-icon mb-3">🎲</div>
+                        <h5>Every Quiz is Unique!</h5>
+                        <p class="text-muted">Our AI generates fresh questions every time based on {{ topic.title }} concepts. Never see the same quiz twice!</p>
+                    </div>
+                    <a href="/generate-quiz/{{ topic.id }}" class="btn btn-primary btn-lg px-5">
+                        Start AI Quiz →
+                    </a>
+                {% endif %}
+            </div>
+            <div class="card-footer bg-light p-3">
+                <div class="row text-center">
+                    <div class="col-4">
+                        <small class="text-muted d-block">Difficulty</small>
+                        <strong>Adaptive</strong>
+                    </div>
+                    <div class="col-4">
+                        <small class="text-muted d-block">Questions</small>
+                        <strong>3-10</strong>
+                    </div>
+                    <div class="col-4">
+                        <small class="text-muted d-block">Time Limit</small>
+                        <strong>3 min/q</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- AI Explanation Modal -->
+<div class="modal fade" id="aiModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">AI Explanation</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body" id="ai-explanation-content">
+                <div class="text-center">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <p class="mt-2">Generating explanation...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+let currentTopic = "{{ topic.title }}";
+let isAIFullscreen = false;
+
+function toggleAIFullscreen() {
+    const topicSection = document.getElementById('topic-section');
+    const sidebarSection = document.getElementById('sidebar-section');
+    const aiAssistantCard = document.getElementById('ai-assistant-card');
+    const aiAssistantBody = document.getElementById('ai-assistant-body');
+    const aiChat = document.getElementById('ai-chat');
+    const codeHelperCard = document.getElementById('code-helper-card');
+    const fullscreenIcon = document.getElementById('fullscreen-icon');
+    
+    isAIFullscreen = !isAIFullscreen;
+    
+    if (isAIFullscreen) {
+        // Expand AI to full width
+        topicSection.classList.add('d-none');
+        sidebarSection.classList.remove('col-lg-6');
+        sidebarSection.classList.add('col-12');
+        
+        // Expand AI assistant card
+        aiAssistantCard.style.height = 'calc(100vh - 150px)';
+        aiChat.style.maxHeight = 'calc(100vh - 250px)';
+        aiChat.style.height = 'calc(100vh - 250px)';
+        
+        // Hide code helper when in fullscreen
+        codeHelperCard.classList.add('d-none');
+        
+        fullscreenIcon.textContent = '⛶';
+        fullscreenIcon.title = 'Exit Full Screen';
+    } else {
+        // Restore split view
+        topicSection.classList.remove('d-none');
+        sidebarSection.classList.remove('col-12');
+        sidebarSection.classList.add('col-lg-6');
+        
+        // Restore AI assistant card
+        aiAssistantCard.style.height = '';
+        aiChat.style.maxHeight = '';
+        aiChat.style.height = '';
+        
+        // Show code helper
+        codeHelperCard.classList.remove('d-none');
+        
+        fullscreenIcon.textContent = '⛶';
+        fullscreenIcon.title = 'Full Screen';
+    }
+}
+
+function askAI(concept, context) {
+    const difficulty = document.getElementById('difficulty-level').value;
+    const chatContainer = document.getElementById('ai-chat');
+    
+    chatContainer.innerHTML = `
+        <div class="user-message mb-2 p-2 bg-light rounded text-dark">
+            <strong>You:</strong> Explain <em>${concept}</em> in ${difficulty} terms
+        </div>
+        <div class="ai-message mb-2 p-3 rounded" style="background: #1a1a1a; border: 1px solid #333;">
+            <div class="d-flex align-items-center mb-2">
+                <span class="spinner-border spinner-border-sm me-2" style="color: #fff;"></span>
+                <strong style="color: #fff;">🤖 AI Tutor:</strong>
+            </div>
+            <div class="ai-content" style="color: #f0f0f0;">Generating response...</div>
+        </div>
+    `;
+    
+    fetch('/api/explain', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+            concept: concept,
+            context: context,
+            difficulty: difficulty
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        // Insert the HTML content
+        chatContainer.querySelector('.ai-content').innerHTML = data.explanation;
+        
+        // Apply syntax highlighting to code blocks
+        if (typeof hljs !== 'undefined') {
+            chatContainer.querySelectorAll('pre code').forEach((block) => {
+                hljs.highlightElement(block);
+            });
+        }
+        
+        // Fix table styling - ensure they have proper classes
+        chatContainer.querySelectorAll('table').forEach(table => {
+            table.style.width = '100%';
+            table.style.borderCollapse = 'collapse';
+            table.style.margin = '1rem 0';
+            table.style.background = '#1a1a1a';
+            table.style.color = '#f0f0f0';
+        });
+        
+        chatContainer.querySelectorAll('th, td').forEach(cell => {
+            cell.style.border = '1px solid #444';
+            cell.style.padding = '0.5rem';
+            cell.style.color = '#f0f0f0';
+        });
+        
+        chatContainer.querySelectorAll('th').forEach(th => {
+            th.style.background = '#333';
+            th.style.fontWeight = '600';
+        });
+    })
+    .catch(error => {
+        chatContainer.querySelector('.ai-content').innerHTML = `<div style="color: #ff6666;">Error: ${error.message}</div>`;
+    });
+}
+
+function explainConcept(concept) {
+    askAI(concept, currentTopic);
+}
+
+function analyzeCode() {
+    const code = document.getElementById('code-input').value;
+    const issue = document.getElementById('code-issue').value;
+    const analysisDiv = document.getElementById('code-analysis');
+    
+    if (!code.trim()) {
+        analysisDiv.innerHTML = '<div class="alert alert-warning">Please enter some code</div>';
+        return;
+    }
+    
+    analysisDiv.innerHTML = '<div class="spinner-border text-success" role="status"></div> Analyzing...';
+    
+    fetch('/api/code-help', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+            code: code,
+            language: 'python',
+            issue: issue
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        analysisDiv.innerHTML = `<div class="analysis-content">${data.analysis}</div>`;
+        hljs.highlightAll();
+    })
+    .catch(error => {
+        analysisDiv.innerHTML = `<div class="alert alert-danger">Error: ${error.message}</div>`;
+    });
+}
+
+function clearChat() {
+    document.getElementById('ai-chat').innerHTML = `
+        <div class="text-muted text-center py-3">
+            Click "Ask AI" or "Explain" on any concept to get started
+        </div>
+    `;
+}
+</script>
+{% endblock %}

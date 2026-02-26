@@ -1,0 +1,443 @@
+{% extends "base.html" %}
+
+{% block title %}{{ topic.title }} Quiz - DSA Master{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item"><a href="/topic/{{ topic.id }}">{{ topic.title }}</a></li>
+            <li class="breadcrumb-item active">AI-Generated Quiz</li>
+        </ol>
+    </nav>
+
+    <div class="alert alert-info d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <strong>🤖 AI-Generated Quiz</strong>
+            <p class="mb-0 small">Generated just now using OpenAI GPT-OSS-120B. Every quiz is unique!</p>
+        </div>
+        <div class="text-end">
+            <span class="badge bg-primary">{{ quiz.difficulty|title }}</span>
+            <span class="badge bg-secondary">{{ questions|length }} Questions</span>
+            {% if quiz.get('fallback') %}
+            <span class="badge bg-warning" title="Using fallback questions">⚠️ Offline Mode</span>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="quiz-header text-center mb-4">
+                <h1 class="display-5 fw-bold">{{ quiz.title }}</h1>
+                <p class="lead text-muted">{{ quiz.description }}</p>
+                
+                <div class="quiz-stats d-flex justify-content-center gap-4 mt-3">
+                    <div class="stat-item">
+                        <span class="stat-value" id="question-counter">1/{{ questions|length }}</span>
+                        <span class="stat-label">Questions</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value text-primary" id="timer">{{ quiz.time_limit }}:00</span>
+                        <span class="stat-label">Time Left</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value text-success" id="score-display">0</span>
+                        <span class="stat-label">Answered</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="progress mb-4" style="height: 8px;">
+                <div class="progress-bar bg-primary" id="progress-bar" style="width: 0%"></div>
+            </div>
+
+            <div id="quiz-container">
+                {% for question in questions %}
+                {% set question_idx = loop.index0 %}
+                <div class="question-card card border-0 shadow-sm mb-4 {% if not loop.first %}d-none{% endif %}" 
+                    data-question-id="{{ question_idx }}" 
+                    id="question-card-{{ question_idx }}">
+                    
+                    <div class="card-header bg-light d-flex justify-content-between align-items-center">
+                        <span class="badge bg-primary">Question {{ loop.index }}</span>
+                        <button class="btn btn-sm btn-outline-info" onclick="explainQuestion({{ question_idx }})">
+                            🤖 Explain
+                        </button>
+                    </div>
+                    
+                    <div class="card-body">
+                        <h5 class="card-title mb-4">{{ question.question|safe }}</h5>
+                        
+                        <div class="options-list" id="options-list-{{ question_idx }}">
+                            {% for key, value in question.options.items() %}
+                            <div class="option-item mb-3">
+                                <input type="radio" 
+                                    class="btn-check" 
+                                    name="question_{{ question_idx }}" 
+                                    id="q{{ question_idx }}_{{ key }}" 
+                                    value="{{ key }}"
+                                    data-question-idx="{{ question_idx }}">
+                                <label class="btn btn-outline-primary w-100 text-start option-label" 
+                                    for="q{{ question_idx }}_{{ key }}">
+                                    <span class="option-key">{{ key }}.</span>
+                                    <span class="option-text">{{ value }}</span>
+                                </label>
+                            </div>
+                            {% endfor %}
+                        </div>
+
+                        <div class="ai-explanation-box alert alert-light border-primary mt-3 d-none" id="ai-explain-{{ question_idx }}">
+                            <div class="d-flex align-items-center mb-2">
+                                <span class="spinner-border spinner-border-sm me-2"></span>
+                                <strong>AI is analyzing...</strong>
+                            </div>
+                        </div>
+
+                        <button class="btn btn-outline-warning btn-sm mt-2" onclick="showHint({{ question_idx }})">
+                            💡 Hint
+                        </button>
+                        <div class="hint-box alert alert-warning mt-2 d-none" id="hint-{{ question_idx }}">
+                            Think about time/space complexity and core concepts.
+                        </div>
+                    </div>
+                    
+                    <div class="card-footer d-flex justify-content-between">
+                        {% if not loop.first %}
+                        <button type="button" class="btn btn-secondary" onclick="previousQuestion()">← Previous</button>
+                        {% else %}
+                        <div></div>
+                        {% endif %}
+                        
+                        {% if loop.last %}
+                        <button type="button" class="btn btn-success" onclick="submitQuiz()">Submit ✓</button>
+                        {% else %}
+                        <button type="button" class="btn btn-primary" onclick="nextQuestion()">Next →</button>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+            <div id="results-container" class="d-none">
+                <div class="card border-0 shadow-lg">
+                    <div class="card-header bg-primary text-white text-center py-4">
+                        <h2 class="mb-0">🎉 Quiz Completed!</h2>
+                    </div>
+                    <div class="card-body p-5">
+                        <div class="text-center mb-4">
+                            <div class="score-circle mx-auto mb-3" id="final-score-circle">
+                                <span class="score-percentage" id="final-score">0%</span>
+                            </div>
+                            <h4 id="result-message">Good Job!</h4>
+                            <div id="improvement-badge" class="mt-2"></div>
+                        </div>
+
+                        <div class="row text-center mb-4">
+                            <div class="col-4">
+                                <div class="result-stat">
+                                    <span class="result-value text-success" id="correct-count">0</span>
+                                    <span class="result-label">Correct</span>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="result-stat">
+                                    <span class="result-value text-danger" id="wrong-count">0</span>
+                                    <span class="result-label">Wrong</span>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="result-stat">
+                                    <span class="result-value text-primary" id="time-taken">0:00</span>
+                                    <span class="result-label">Time</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                            <a href="/generate-quiz/{{ topic.id }}" class="btn btn-primary btn-lg">🔄 New Quiz</a>
+                            <a href="/topic/{{ topic.id }}" class="btn btn-outline-primary btn-lg">Topic</a>
+                            <a href="/" class="btn btn-success btn-lg">Home</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-4" id="detailed-review">
+                    <h4 class="mb-3">Review</h4>
+                    <div id="review-questions"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="submitModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Submit Quiz?</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <p>Answered: <span id="answered-count">0</span> / {{ questions|length }}</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Continue</button>
+                <button type="button" class="btn btn-primary" onclick="confirmSubmit()">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+let currentQuestion = 0;
+const totalQuestions = {{ questions|length }};
+let timeLeft = {{ quiz.time_limit }} * 60;
+let timerInterval = null;
+let answers = {};
+let quizStartTime = Date.now();
+
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('Quiz initialized');
+    startTimer();
+    updateProgress();
+    updateAnsweredCount();
+    setupOptionListeners();
+});
+
+function setupOptionListeners() {
+    document.querySelectorAll('input[type="radio"]').forEach(function(radio) {
+        radio.addEventListener('change', function() {
+            const questionIdx = this.getAttribute('data-question-idx');
+            const selectedValue = this.value;
+            
+            answers[questionIdx] = selectedValue;
+            
+            const questionCard = document.getElementById('question-card-' + questionIdx);
+            if (questionCard) {
+                questionCard.querySelectorAll('.option-item').forEach(function(opt) {
+                    opt.classList.remove('selected');
+                });
+                this.closest('.option-item').classList.add('selected');
+            }
+            
+            updateAnsweredCount();
+        });
+    });
+}
+
+function startTimer() {
+    if (timerInterval) clearInterval(timerInterval);
+    
+    updateTimerDisplay();
+    
+    timerInterval = setInterval(function() {
+        timeLeft--;
+        updateTimerDisplay();
+        
+        if (timeLeft <= 0) {
+            clearInterval(timerInterval);
+            submitQuiz(true);
+        }
+    }, 1000);
+}
+
+function updateTimerDisplay() {
+    const timerEl = document.getElementById('timer');
+    if (!timerEl) return;
+    
+    const minutes = Math.floor(timeLeft / 60);
+    const seconds = timeLeft % 60;
+    timerEl.textContent = minutes + ':' + seconds.toString().padStart(2, '0');
+    
+    if (timeLeft < 60) timerEl.className = 'stat-value text-danger';
+    else if (timeLeft < 180) timerEl.className = 'stat-value text-warning';
+    else timerEl.className = 'stat-value text-primary';
+}
+
+function updateProgress() {
+    const progress = ((currentQuestion + 1) / totalQuestions) * 100;
+    const bar = document.getElementById('progress-bar');
+    const counter = document.getElementById('question-counter');
+    
+    if (bar) bar.style.width = progress + '%';
+    if (counter) counter.textContent = (currentQuestion + 1) + '/' + totalQuestions;
+}
+
+function updateAnsweredCount() {
+    const display = document.getElementById('score-display');
+    if (display) display.textContent = Object.keys(answers).length;
+}
+
+function nextQuestion() {
+    if (currentQuestion >= totalQuestions - 1) return;
+    
+    const currentCard = document.getElementById('question-card-' + currentQuestion);
+    if (currentCard) currentCard.classList.add('d-none');
+    
+    currentQuestion++;
+    
+    const nextCard = document.getElementById('question-card-' + currentQuestion);
+    if (nextCard) nextCard.classList.remove('d-none');
+    
+    updateProgress();
+}
+
+function previousQuestion() {
+    if (currentQuestion <= 0) return;
+    
+    const currentCard = document.getElementById('question-card-' + currentQuestion);
+    if (currentCard) currentCard.classList.add('d-none');
+    
+    currentQuestion--;
+    
+    const prevCard = document.getElementById('question-card-' + currentQuestion);
+    if (prevCard) prevCard.classList.remove('d-none');
+    
+    updateProgress();
+}
+
+function showHint(index) {
+    const hint = document.getElementById('hint-' + index);
+    if (hint) hint.classList.remove('d-none');
+}
+
+function explainQuestion(index) {
+    const box = document.getElementById('ai-explain-' + index);
+    if (!box) return;
+    
+    box.classList.remove('d-none');
+    
+    const card = document.getElementById('question-card-' + index);
+    const title = card ? card.querySelector('.card-title').textContent : '';
+    
+    fetch('/api/explain', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+            concept: title,
+            context: '{{ topic.title }}',
+            difficulty: 'intermediate'
+        })
+    })
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+        box.innerHTML = '<div class="ai-explanation-content">' + data.explanation + '</div>';
+    })
+    .catch(function() {
+        box.innerHTML = '<div class="text-danger">Failed to load.</div>';
+    });
+}
+
+function submitQuiz(autoSubmit) {
+    const answered = Object.keys(answers).length;
+    
+    if (!autoSubmit && answered < totalQuestions) {
+        const countEl = document.getElementById('answered-count');
+        if (countEl) countEl.textContent = answered;
+        
+        const modal = new bootstrap.Modal(document.getElementById('submitModal'));
+        modal.show();
+        return;
+    }
+    
+    if (timerInterval) clearInterval(timerInterval);
+    
+    const timeTaken = Math.floor((Date.now() - quizStartTime) / 1000);
+    const mins = Math.floor(timeTaken / 60);
+    const secs = timeTaken % 60;
+    
+    fetch('/api/submit-quiz', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({answers: answers})
+    })
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+        showResults(data, mins + ':' + secs.toString().padStart(2, '0'));
+    })
+    .catch(function(err) {
+        alert('Error: ' + err.message);
+    });
+}
+
+function confirmSubmit() {
+    const modalEl = document.getElementById('submitModal');
+    const modal = bootstrap.Modal.getInstance(modalEl);
+    if (modal) modal.hide();
+    submitQuiz(true);
+}
+
+function showResults(data, timeStr) {
+    document.getElementById('quiz-container').classList.add('d-none');
+    document.getElementById('results-container').classList.remove('d-none');
+    
+    document.getElementById('final-score').textContent = Math.round(data.score) + '%';
+    document.getElementById('correct-count').textContent = data.correct;
+    document.getElementById('wrong-count').textContent = data.total - data.correct;
+    document.getElementById('time-taken').textContent = timeStr;
+    
+    const circle = document.getElementById('final-score-circle');
+    const msgEl = document.getElementById('result-message');
+    
+    if (data.score >= 80) {
+        circle.style.borderColor = '#28a745';
+        msgEl.textContent = '🌟 Excellent!';
+    } else if (data.score >= 60) {
+        circle.style.borderColor = '#ffc107';
+        msgEl.textContent = '👍 Good job!';
+    } else {
+        circle.style.borderColor = '#dc3545';
+        msgEl.textContent = '📚 Keep learning!';
+    }
+    
+    if (data.improved) {
+        document.getElementById('improvement-badge').innerHTML = 
+            '<span class="badge bg-success">🎉 New Best: ' + data.previous_best + '%</span>';
+    }
+    
+    const container = document.getElementById('review-questions');
+    container.innerHTML = '';
+    
+    data.results.forEach(function(result, idx) {
+        const isCorrect = result.is_correct;
+        const card = document.createElement('div');
+        card.className = 'card mb-3 ' + (isCorrect ? 'border-success' : 'border-danger');
+        
+        let optionsHtml = '';
+        Object.entries(result.options).forEach(function([k, v]) {
+            let cls = 'p-2 mb-1 rounded ';
+            if (k === result.correct_answer) cls += 'bg-success text-white';
+            else if (k === result.user_answer && !isCorrect) cls += 'bg-danger text-white';
+            else cls += 'bg-light';
+            
+            let mark = k === result.correct_answer ? ' ✓' : 
+                      (k === result.user_answer && !isCorrect ? ' ✗' : '');
+            
+            optionsHtml += '<div class="' + cls + '">' + k + '. ' + v + mark + '</div>';
+        });
+        
+        card.innerHTML = 
+            '<div class="card-header ' + (isCorrect ? 'bg-success' : 'bg-danger') + ' text-white">' +
+                '<span>Q' + (idx + 1) + '</span><span>' + (isCorrect ? '✓' : '✗') + '</span>' +
+            '</div>' +
+            '<div class="card-body">' +
+                '<p class="fw-bold">' + result.question + '</p>' +
+                '<div class="options-review">' + optionsHtml + '</div>' +
+                (result.explanation ? '<div class="alert alert-info mt-3"><strong>Explanation:</strong> ' + result.explanation + '</div>' : '') +
+            '</div>';
+        
+        container.appendChild(card);
+    });
+    
+    window.scrollTo(0, 0);
+}
+
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'ArrowRight') nextQuestion();
+    if (e.key === 'ArrowLeft') previousQuestion();
+});
+</script>
+{% endblock %}

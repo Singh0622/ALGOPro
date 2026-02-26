@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+
+{% block title %}Generate Quiz - {{ topic.title }}{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item"><a href="/topic/{{ topic.id }}">{{ topic.title }}</a></li>
+            <li class="breadcrumb-item active">Generate Quiz</li>
+        </ol>
+    </nav>
+
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            <div class="card border-0 shadow-lg">
+                <div class="card-header bg-primary text-white text-center py-4">
+                    <h3 class="mb-0">🎯 Generate Custom Quiz</h3>
+                    <p class="mb-0 mt-2 text-white-50">AI will create unique questions just for you</p>
+                </div>
+                <div class="card-body p-5">
+                    <form method="POST" id="quiz-gen-form">
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">Difficulty Level</label>
+                            <div class="btn-group w-100" role="group">
+                                <input type="radio" class="btn-check" name="difficulty" id="diff-easy" value="easy" autocomplete="off">
+                                <label class="btn btn-outline-success" for="diff-easy">Easy</label>
+                                
+                                <input type="radio" class="btn-check" name="difficulty" id="diff-medium" value="medium" autocomplete="off" checked>
+                                <label class="btn btn-outline-warning" for="diff-medium">Medium</label>
+                                
+                                <input type="radio" class="btn-check" name="difficulty" id="diff-hard" value="hard" autocomplete="off">
+                                <label class="btn btn-outline-danger" for="diff-hard">Hard</label>
+                                
+                                <input type="radio" class="btn-check" name="difficulty" id="diff-mixed" value="mixed" autocomplete="off">
+                                <label class="btn btn-outline-primary" for="diff-mixed">Mixed</label>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="num_questions" class="form-label fw-bold">Number of Questions</label>
+                            <input type="range" class="form-range" id="num_questions" name="num_questions" 
+                                   min="3" max="10" value="5" oninput="updateQuestionCount(this.value)">
+                            <div class="text-center">
+                                <span class="badge bg-primary fs-6" id="question-count-display">5 Questions</span>
+                            </div>
+                        </div>
+
+                        <div class="alert alert-info d-flex align-items-center">
+                            <span class="fs-4 me-3">🤖</span>
+                            <div>
+                                <strong>AI-Powered Generation</strong><br>
+                                <small class="text-muted">AI will generate unique questions based on {{ topic.title }} concepts. Every quiz is different!</small>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-lg w-100 mt-3" id="generate-btn">
+                            <span class="generate-text">Generate Quiz Now</span>
+                            <span class="generating-text d-none">
+                                <span class="spinner-border spinner-border-sm me-2"></span>
+                                AI is crafting your questions...
+                            </span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Previous Attempts -->
+            {% if session.get('quiz_progress', {}).get(topic.id) %}
+            <div class="card border-0 shadow-sm mt-4">
+                <div class="card-header bg-success text-white">
+                    <h5 class="mb-0">Your Previous Best</h5>
+                </div>
+                <div class="card-body text-center">
+                    <div class="display-4 fw-bold text-success">
+                        {{ session['quiz_progress'][topic.id].score }}%
+                    </div>
+                    <p class="text-muted mb-0">Last attempted: {{ session['quiz_progress'][topic.id].last_attempt[:10] }}</p>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+function updateQuestionCount(val) {
+    document.getElementById('question-count-display').textContent = val + ' Questions';
+}
+
+document.getElementById('quiz-gen-form').addEventListener('submit', function() {
+    document.querySelector('.generate-text').classList.add('d-none');
+    document.querySelector('.generating-text').classList.remove('d-none');
+    document.getElementById('generate-btn').disabled = true;
+});
+</script>
+{% endblock %}

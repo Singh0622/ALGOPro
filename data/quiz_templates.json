@@ -1,0 +1,311 @@
+{
+  "templates": {
+    "arrays-strings": {
+      "title": "Arrays & Strings Quiz",
+      "description": "Test your knowledge of array operations, string manipulation, and two-pointer techniques",
+      "prompt_template": "Generate {count} multiple choice questions about {difficulty} level Arrays and Strings covering: array memory layout, time complexity of operations, two pointers technique, sliding window, string manipulation, and common algorithms. Include code snippets where relevant.",
+      "time_per_question": 3,
+      "question_types": ["time_complexity", "algorithm_selection", "code_analysis", "conceptual"],
+      "difficulty_distribution": {"easy": 40, "medium": 40, "hard": 20}
+    },
+    "linked-lists": {
+      "title": "Linked Lists Quiz",
+      "description": "Test your understanding of linked list operations and algorithms",
+      "prompt_template": "Generate {count} questions about {difficulty} level Linked Lists covering: pointer manipulation, cycle detection, reversal techniques, merge operations, and complex modifications. Focus on understanding memory references.",
+      "time_per_question": 3,
+      "question_types": ["pointer_logic", "algorithm_steps", "complexity_analysis", "edge_cases"],
+      "difficulty_distribution": {"easy": 35, "medium": 45, "hard": 20}
+    },
+    "stacks-queues": {
+      "title": "Stacks & Queues Quiz",
+      "description": "Test your knowledge of LIFO and FIFO data structures",
+      "prompt_template": "Generate {count} questions about {difficulty} level Stacks and Queues covering: LIFO/FIFO principles, implementation variations, monotonic structures, and expression evaluation. Include real-world applications.",
+      "time_per_question": 3,
+      "question_types": ["operation_order", "implementation", "application_based", "optimization"],
+      "difficulty_distribution": {"easy": 40, "medium": 40, "hard": 20}
+    },
+    "trees": {
+      "title": "Trees Quiz",
+      "description": "Test your understanding of binary trees, BSTs, and tree algorithms",
+      "prompt_template": "Generate {count} questions about {difficulty} level Trees covering: traversal methods, BST properties, self-balancing, tree modifications, and complex tree algorithms. Include tree structure diagrams in descriptions.",
+      "time_per_question": 4,
+      "question_types": ["traversal", "property_validation", "modification", "advanced_algorithms"],
+      "difficulty_distribution": {"easy": 30, "medium": 40, "hard": 30}
+    },
+    "heaps": {
+      "title": "Heaps & Priority Queues Quiz",
+      "description": "Test your knowledge of heap data structures and applications",
+      "prompt_template": "Generate {count} questions about {difficulty} level Heaps and Priority Queues covering: heap properties, heapify process, priority queue applications, and advanced heap problems. Focus on time complexity advantages.",
+      "time_per_question": 4,
+      "question_types": ["property_based", "operation_analysis", "application", "comparison"],
+      "difficulty_distribution": {"easy": 35, "medium": 40, "hard": 25}
+    },
+    "hashing": {
+      "title": "Hash Tables Quiz",
+      "description": "Test your understanding of hash-based data structures",
+      "prompt_template": "Generate {count} questions about {difficulty} level Hash Tables covering: hash functions, collision resolution, complexity analysis, caching strategies, and distributed hashing concepts.",
+      "time_per_question": 3,
+      "question_types": ["collision_handling", "complexity", "design", "advanced_applications"],
+      "difficulty_distribution": {"easy": 35, "medium": 40, "hard": 25}
+    },
+    "graphs": {
+      "title": "Graphs Quiz",
+      "description": "Test your graph algorithms and traversal knowledge",
+      "prompt_template": "Generate {count} questions about {difficulty} level Graphs covering: representations, traversals, shortest paths, spanning trees, network flows, and advanced graph algorithms. Include weighted and directed scenarios.",
+      "time_per_question": 5,
+      "question_types": ["representation", "traversal", "shortest_path", "mst", "network_flow"],
+      "difficulty_distribution": {"easy": 25, "medium": 35, "hard": 40}
+    },
+    "sorting": {
+      "title": "Sorting Algorithms Quiz",
+      "description": "Test your knowledge of sorting techniques and analysis",
+      "prompt_template": "Generate {count} questions about {difficulty} level Sorting Algorithms covering: comparison sorts, linear sorts, stability, in-place sorting, and hybrid algorithms. Include step-by-step execution traces.",
+      "time_per_question": 3,
+      "question_types": ["algorithm_selection", "step_execution", "complexity", "stability"],
+      "difficulty_distribution": {"easy": 40, "medium": 35, "hard": 25}
+    },
+    "searching": {
+      "title": "Searching Algorithms Quiz",
+      "description": "Test your searching technique knowledge",
+      "prompt_template": "Generate {count} questions about {difficulty} level Searching Algorithms covering: linear search variations, binary search variants, search space reduction, and applications in rotated arrays or matrices.",
+      "time_per_question": 3,
+      "question_types": ["binary_search_variants", "search_space", "application", "comparison"],
+      "difficulty_distribution": {"easy": 40, "medium": 40, "hard": 20}
+    },
+    "dynamic-programming": {
+      "title": "Dynamic Programming Quiz",
+      "description": "Test your DP optimization skills",
+      "prompt_template": "Generate {count} questions about {difficulty} level Dynamic Programming covering: memoization vs tabulation, state definition, transitions, space optimization, and classic DP patterns (knapsack, LCS, etc.).",
+      "time_per_question": 5,
+      "question_types": ["state_definition", "transition", "space_opt", "pattern_recognition"],
+      "difficulty_distribution": {"easy": 25, "medium": 35, "hard": 40}
+    },
+    "greedy": {
+      "title": "Greedy Algorithms Quiz",
+      "description": "Test your greedy choice and optimization knowledge",
+      "prompt_template": "Generate {count} questions about {difficulty} level Greedy Algorithms covering: activity selection, interval problems, Huffman coding, and proof of optimality. Include counterexamples where greedy fails.",
+      "time_per_question": 4,
+      "question_types": ["algorithm_design", "optimality_proof", "failure_cases", "application"],
+      "difficulty_distribution": {"easy": 35, "medium": 40, "hard": 25}
+    },
+    "backtracking": {
+      "title": "Backtracking Quiz",
+      "description": "Test your systematic search and pruning knowledge",
+      "prompt_template": "Generate {count} questions about {difficulty} level Backtracking covering: state space exploration, pruning, constraint satisfaction, and optimization problems. Include N-Queens, Sudoku, and permutation problems.",
+      "time_per_question": 5,
+      "question_types": ["state_space", "pruning", "constraint", "optimization"],
+      "difficulty_distribution": {"easy": 30, "medium": 40, "hard": 30}
+    },
+    "bit-manipulation": {
+      "title": "Bit Manipulation Quiz",
+      "description": "Test your low-level optimization skills",
+      "prompt_template": "Generate {count} questions about {difficulty} level Bit Manipulation covering: basic operations, bit masks, tricks for common problems, and bitwise DP. Include binary representation scenarios.",
+      "time_per_question": 3,
+      "question_types": ["basic_ops", "masks", "tricks", "advanced"],
+      "difficulty_distribution": {"easy": 40, "medium": 35, "hard": 25}
+    },
+    "tries": {
+      "title": "Trie (Prefix Tree) Quiz",
+      "description": "Test your string storage and retrieval knowledge",
+      "prompt_template": "Generate {count} questions about {difficulty} level Tries covering: node structure, insertion/search, prefix operations, auto-complete, and advanced applications like XOR maximization.",
+      "time_per_question": 4,
+      "question_types": ["structure", "operations", "prefix", "advanced"],
+      "difficulty_distribution": {"easy": 35, "medium": 40, "hard": 25}
+    },
+    "segment-trees": {
+      "title": "Segment Trees & Fenwick Quiz",
+      "description": "Test your range query optimization knowledge",
+      "prompt_template": "Generate {count} questions about {difficulty} level Segment Trees and Fenwick Trees covering: tree construction, range queries, point updates, lazy propagation, and BIT operations.",
+      "time_per_question": 5,
+      "question_types": ["construction", "query", "update", "lazy_prop", "bit"],
+      "difficulty_distribution": {"easy": 25, "medium": 35, "hard": 40}
+    }
+  },
+  "fallback_quizzes": {
+    "arrays-strings": {
+      "title": "Arrays & Strings Quiz",
+      "description": "Fundamental quiz on arrays and strings (Offline Mode)",
+      "time_limit": 15,
+      "questions": [
+        {
+          "question": "What is the time complexity of accessing an element by index in an array?",
+          "options": {"A": "O(1)", "B": "O(n)", "C": "O(log n)", "D": "O(n²)"},
+          "correct": "A",
+          "explanation": "Arrays provide direct memory access via index calculation, making it constant time O(1)."
+        },
+        {
+          "question": "Which algorithm efficiently finds a pattern in text with O(n+m) complexity?",
+          "options": {"A": "Naive Pattern Matching", "B": "KMP Algorithm", "C": "Bubble Sort", "D": "Binary Search"},
+          "correct": "B",
+          "explanation": "Knuth-Morris-Pratt (KMP) uses prefix function to skip unnecessary comparisons, achieving linear time complexity."
+        },
+        {
+          "question": "In the Two Pointers technique for sorted arrays, when do we move the left pointer?",
+          "options": {"A": "When sum > target", "B": "When sum < target", "C": "Always move both", "D": "Never move left"},
+          "correct": "B",
+          "explanation": "If sum is less than target in a sorted array, we need larger values, so we increment left pointer."
+        },
+        {
+          "question": "What is the space complexity of the sliding window technique?",
+          "options": {"A": "O(n)", "B": "O(1) or O(k)", "C": "O(n²)", "D": "O(log n)"},
+          "correct": "B",
+          "explanation": "Sliding window typically uses O(1) extra space or O(k) for the window size, making it space-efficient."
+        },
+        {
+          "question": "Which method creates the most efficient string reversal in Python?",
+          "options": {"A": "Loop with concatenation", "B": "Slicing [::-1]", "C": "reversed() function", "D": "Recursion"},
+          "correct": "B",
+          "explanation": "String slicing [::-1] is implemented in C and is the most Pythonic and efficient method."
+        }
+      ]
+    },
+    "linked-lists": {
+      "title": "Linked Lists Quiz",
+      "description": "Fundamental quiz on linked lists (Offline Mode)",
+      "time_limit": 15,
+      "questions": [
+        {
+          "question": "What is the time complexity of inserting at the beginning of a singly linked list?",
+          "options": {"A": "O(1)", "B": "O(n)", "C": "O(log n)", "D": "O(n²)"},
+          "correct": "A",
+          "explanation": "Head insertion only requires creating a new node and updating the head pointer, which is O(1)."
+        },
+        {
+          "question": "How does Floyd's Cycle Detection algorithm work?",
+          "options": {"A": "Hash Set tracking", "B": "Two pointers moving at different speeds", "C": "Marking visited nodes", "D": "Recursive traversal"},
+          "correct": "B",
+          "explanation": "Floyd's algorithm uses two pointers (tortoise and hare) moving at 1x and 2x speed. If they meet, a cycle exists."
+        },
+        {
+          "question": "What additional pointer does a doubly linked list node contain?",
+          "options": {"A": "Parent pointer", "B": "Previous pointer", "C": "Random pointer", "D": "Child pointer"},
+          "correct": "B",
+          "explanation": "Doubly linked list nodes contain data, next pointer, and previous pointer for bidirectional traversal."
+        },
+        {
+          "question": "Why can't we use binary search on a standard linked list?",
+          "options": {"A": "No random access", "B": "Too slow", "C": "Memory fragmentation", "D": "Not sorted"},
+          "correct": "A",
+          "explanation": "Binary search requires O(1) access to middle element. Linked lists only support sequential access O(n)."
+        },
+        {
+          "question": "What is the optimal approach to reverse a linked list iteratively?",
+          "options": {"A": "Stack-based", "B": "Three-pointer manipulation", "C": "Recursion", "D": "Array conversion"},
+          "correct": "B",
+          "explanation": "Using three pointers (prev, current, next) to reverse links iteratively is O(n) time and O(1) space optimal."
+        }
+      ]
+    },
+    "stacks-queues": {
+      "title": "Stacks & Queues Quiz",
+      "description": "Fundamental quiz on stacks and queues (Offline Mode)",
+      "time_limit": 15,
+      "questions": [
+        {
+          "question": "Which principle does a Stack data structure follow?",
+          "options": {"A": "FIFO", "B": "LIFO", "C": "LRU", "D": "Priority"},
+          "correct": "B",
+          "explanation": "Stack follows Last In First Out (LIFO) - the last element added is the first one removed."
+        },
+        {
+          "question": "What is the time complexity of push and pop operations in a stack?",
+          "options": {"A": "O(n)", "B": "O(1)", "C": "O(log n)", "D": "O(n²)"},
+          "correct": "B",
+          "explanation": "Both push and pop operate at the top of stack with simple pointer operations, making them O(1)."
+        },
+        {
+          "question": "How many stacks are needed to implement a queue?",
+          "options": {"A": "1", "B": "2", "C": "3", "D": "4"},
+          "correct": "B",
+          "explanation": "Two stacks are needed: input stack for enqueue and output stack for dequeue."
+        },
+        {
+          "question": "What is a monotonic stack used for?",
+          "options": {"A": "Sorting", "B": "Next Greater/Smaller Element", "C": "Expression evaluation", "D": "Parentheses matching"},
+          "correct": "B",
+          "explanation": "Monotonic stacks maintain elements in sorted order and efficiently solve next greater/smaller element problems."
+        },
+        {
+          "question": "Which application uses queues for task management?",
+          "options": {"A": "Undo operations", "B": "CPU scheduling", "C": "Expression parsing", "D": "Memory allocation"},
+          "correct": "B",
+          "explanation": "CPU scheduling uses various queues (ready, waiting) to manage processes in FIFO order."
+        }
+      ]
+    },
+    "trees": {
+      "title": "Trees Quiz",
+      "description": "Fundamental quiz on trees (Offline Mode)",
+      "time_limit": 20,
+      "questions": [
+        {
+          "question": "What is the maximum number of nodes at level 'l' in a binary tree?",
+          "options": {"A": "2^l", "B": "2^(l-1)", "C": "l²", "D": "2l"},
+          "correct": "B",
+          "explanation": "Level l (root at level 1) can have at most 2^(l-1) nodes. Root level has 2^0 = 1 node."
+        },
+        {
+          "question": "Where is the smallest element in a Binary Search Tree?",
+          "options": {"A": "Root", "B": "Leftmost node", "C": "Rightmost node", "D": "Leaf node"},
+          "correct": "B",
+          "explanation": "In BST, left child is always smaller than parent. The smallest element is the leftmost node."
+        },
+        {
+          "question": "What traversal gives sorted order for a BST?",
+          "options": {"A": "Pre-order", "B": "Post-order", "C": "In-order", "D": "Level-order"},
+          "correct": "C",
+          "explanation": "In-order traversal (Left-Root-Right) visits nodes in ascending sorted order in a BST."
+        },
+        {
+          "question": "What is the height of an AVL tree with n nodes?",
+          "options": {"A": "O(n)", "B": "O(log n)", "C": "O(n²)", "D": "O(1)"},
+          "correct": "B",
+          "explanation": "AVL trees maintain balance factor of -1, 0, or 1, ensuring height is always O(log n)."
+        },
+        {
+          "question": "Which traversal uses a queue data structure?",
+          "options": {"A": "DFS", "B": "BFS/Level-order", "C": "In-order", "D": "Pre-order"},
+          "correct": "B",
+          "explanation": "Breadth-First Search (Level-order) traversal uses a queue to process nodes level by level."
+        }
+      ]
+    },
+    "dynamic-programming": {
+      "title": "Dynamic Programming Quiz",
+      "description": "Fundamental quiz on dynamic programming (Offline Mode)",
+      "time_limit": 25,
+      "questions": [
+        {
+          "question": "What are the two key properties for DP to apply?",
+          "options": {"A": "Sorting and Searching", "B": "Overlapping Subproblems and Optimal Substructure", "C": "Recursion and Iteration", "D": "Divide and Conquer"},
+          "correct": "B",
+          "explanation": "DP requires Overlapping Subproblems and Optimal Substructure for efficient optimization."
+        },
+        {
+          "question": "What is the difference between Memoization and Tabulation?",
+          "options": {"A": "Time complexity", "B": "Top-down vs Bottom-up", "C": "Space complexity", "D": "Problem type"},
+          "correct": "B",
+          "explanation": "Memoization is top-down (recursive with cache), Tabulation is bottom-up (iterative table filling)."
+        },
+        {
+          "question": "In 0/1 Knapsack, what does dp[i][w] represent?",
+          "options": {"A": "Minimum weight", "B": "Maximum value with first i items and capacity w", "C": "Item count", "D": "Total profit"},
+          "correct": "B",
+          "explanation": "dp[i][w] stores maximum value achievable using first i items without exceeding weight capacity w."
+        },
+        {
+          "question": "What is the space optimization technique in DP?",
+          "options": {"A": "Use recursion", "B": "Rolling array / Keep only needed states", "C": "Increase table size", "D": "Use hash map"},
+          "correct": "B",
+          "explanation": "Space optimization uses rolling array or keeps only previous row/states when current only depends on recent states."
+        },
+        {
+          "question": "Which problem demonstrates optimal substructure?",
+          "options": {"A": "Merge Sort", "B": "Shortest Path", "C": "Linear Search", "D": "Quick Sort"},
+          "correct": "B",
+          "explanation": "Shortest Path has optimal substructure: shortest path to destination contains shortest paths to intermediate nodes."
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,786 @@
+{
+  "topics": [
+    {
+      "id": "arrays-strings",
+      "title": "Arrays & Strings",
+      "icon": "📊",
+      "description": "Foundation of DSA - linear data structures with constant access and dynamic manipulation",
+      "difficulty": "Beginner",
+      "subtopics": [
+        {
+          "name": "Array Basics & Memory Layout",
+          "video": "https://www.youtube.com/embed/pmN9ExDf3yQ",
+          "concepts": ["Contiguous Memory", "Index-Based Access", "Dynamic Arrays", "Amortized Analysis", "Array Resizing"]
+        },
+        {
+          "name": "String Manipulation & Pattern Matching",
+          "video": "https://www.youtube.com/embed/W8hPsBquD6Y",
+          "concepts": ["String Immutability", "StringBuilder", "KMP Algorithm", "Rabin-Karp", "Z-Algorithm"]
+        },
+        {
+          "name": "Two Pointers Technique",
+          "video": "https://www.youtube.com/embed/On03HWe2tZM",
+          "concepts": ["Pair Sum", "3Sum Problem", "Container With Most Water", "Trapping Rain Water", "Palindrome Check"]
+        },
+        {
+          "name": "Sliding Window",
+          "video": "https://www.youtube.com/embed/MK-NZ4hN7rs",
+          "concepts": ["Fixed Window Size", "Variable Window Size", "Longest Substring Without Repeating", "Minimum Window Substring", "Anagram Detection"]
+        },
+        {
+          "name": "Prefix Sum & Difference Array",
+          "video": "https://www.youtube.com/embed/xbYr9JOC2Lk",
+          "concepts": ["Range Sum Query", "2D Prefix Sum", "Difference Array", "Range Updates", "Subarray Sum Equals K"]
+        }
+      ]
+    },
+    {
+      "id": "linked-lists",
+      "title": "Linked Lists",
+      "icon": "🔗",
+      "description": "Dynamic linear data structures with efficient insertion and deletion",
+      "difficulty": "Beginner",
+      "subtopics": [
+        {
+          "name": "Singly Linked List",
+          "video": "https://www.youtube.com/embed/Hj_rA0dhr2I",
+          "concepts": ["Node Structure", "Pointer Manipulation", "Insertion at Head/Tail", "Deletion", "Traversal"]
+        },
+        {
+          "name": "Doubly Linked List",
+          "video": "https://www.youtube.com/embed/JdQeNxWCguQ",
+          "concepts": ["Bidirectional Pointers", "Insertion", "Deletion", "Reverse Traversal", "LRU Cache Implementation"]
+        },
+        {
+          "name": "Advanced Linked List Operations",
+          "video": "https://www.youtube.com/embed/iRtLEoL-r-g",
+          "concepts": ["Reversal (Iterative & Recursive)", "Cycle Detection (Floyd's)", "Merge Sorted Lists", "Find Intersection", "Remove Nth from End"]
+        },
+        {
+          "name": "Complex Problems",
+          "video": "https://www.youtube.com/embed/zzoAbm35jyQ",
+          "concepts": ["Reorder List", "Copy List with Random Pointer", "Add Two Numbers", "Split Linked List", "Flatten Multilevel DLL"]
+        }
+      ]
+    },
+    {
+      "id": "stacks-queues",
+      "title": "Stacks & Queues",
+      "icon": "📚",
+      "description": "LIFO and FIFO data structures for systematic data processing",
+      "difficulty": "Beginner",
+      "subtopics": [
+        {
+          "name": "Stack Fundamentals",
+          "video": "https://www.youtube.com/embed/wjI1WNcIntg",
+          "concepts": ["Push/Pop Operations", "Peek/Top", "Stack using Array", "Stack using Linked List", "Min Stack Design"]
+        },
+        {
+          "name": "Queue & Deque",
+          "video": "https://www.youtube.com/embed/MZI7L991634https://www.youtube.com/embed/MZI7L991634",
+          "concepts": ["Enqueue/Dequeue", "Circular Queue", "Double-Ended Queue", "Queue using Stacks", "Sliding Window Maximum"]
+        },
+        {
+          "name": "Monotonic Stack/Queue",
+          "video": "https://www.youtube.com/embed/DtJVwbbicjQ",
+          "concepts": ["Next Greater Element", "Previous Less Element", "Largest Rectangle in Histogram", "Maximal Rectangle", "Stock Span Problem"]
+        },
+        {
+          "name": "Expression Evaluation",
+          "video": "https://www.youtube.com/embed/MeRb_1bddWg",
+          "concepts": ["Infix to Postfix", "Postfix Evaluation", "Valid Parentheses", "Remove Invalid Parentheses", "Basic Calculator"]
+        }
+      ]
+    },
+    {
+      "id": "trees",
+      "title": "Trees",
+      "icon": "🌳",
+      "description": "Hierarchical data structures for efficient searching and organization",
+      "difficulty": "Intermediate",
+      "subtopics": [
+        {
+          "name": "Binary Tree Fundamentals",
+          "video": "https://www.youtube.com/embed/HZ5YTanv5QE",
+          "concepts": ["Tree Traversals (DFS & BFS)", "Height & Depth", "Diameter of Tree", "Path Sum", "Lowest Common Ancestor"]
+        },
+        {
+          "name": "Binary Search Tree",
+          "video": "https://www.youtube.com/embed/pYT9F8_LFTM",
+          "concepts": ["BST Operations", "Validation", "Kth Smallest/Largest", "Range Sum", "Convert Sorted Array to BST"]
+        },
+        {
+          "name": "Self-Balancing Trees",
+          "video": "https://www.youtube.com/embed/E9DOBLNB-aE",
+          "concepts": ["AVL Trees", "Red-Black Trees", "Rotations", "Balance Factor", "B-Trees"]
+        },
+        {
+          "name": "Advanced Tree Problems",
+          "video": "https://www.youtube.com/embed/fAAZixBzIAI",
+          "concepts": ["Serialize/Deserialize", "Vertical Order Traversal", "Boundary Traversal", "Top/Bottom View", "Morris Traversal"]
+        }
+      ]
+    },
+    {
+      "id": "heaps",
+      "title": "Heaps & Priority Queues",
+      "icon": "⛰️",
+      "description": "Complete binary tree structures for efficient priority management",
+      "difficulty": "Intermediate",
+      "subtopics": [
+        {
+          "name": "Heap Fundamentals",
+          "video": "https://www.youtube.com/embed/t0Cq6tVNRBA",
+          "concepts": ["Min/Max Heap", "Heapify Operation", "Heap Sort", "Array Representation", "Heap Properties"]
+        },
+        {
+          "name": "Priority Queue Applications",
+          "video": "https://www.youtube.com/embed/mG1gFP6e-Us",
+          "concepts": ["Top K Elements", "Kth Largest/Smallest", "Merge K Sorted Lists", "Task Scheduler", "Reorganize String"]
+        },
+        {
+          "name": "Advanced Heap Problems",
+          "video": "https://www.youtube.com/embed/b6Gq6V8Tvpg",
+          "concepts": ["Median from Data Stream", "Sliding Window Median", "Find Median from Data Stream", "Skyline Problem", "Trapping Rain Water II"]
+        }
+      ]
+    },
+    {
+      "id": "hashing",
+      "title": "Hash Tables",
+      "icon": "🔑",
+      "description": "Key-value storage with O(1) average case access time",
+      "difficulty": "Intermediate",
+      "subtopics": [
+        {
+          "name": "Hashing Fundamentals",
+          "video": "https://www.youtube.com/embed/zeMa9sg-VJM",
+          "concepts": ["Hash Functions", "Collision Resolution", "Chaining", "Open Addressing", "Load Factor"]
+        },
+        {
+          "name": "Hash Map Applications",
+          "video": "https://www.youtube.com/embed/y11XNXi9dgs",
+          "concepts": ["Two Sum", "Group Anagrams", "Longest Consecutive Sequence", "Subarray Sum Equals K", "LRU Cache"]
+        },
+        {
+          "name": "Advanced Hashing",
+          "video": "https://www.youtube.com/embed/Nu8YGneFCWE",
+          "concepts": ["Consistent Hashing", "Bloom Filters", "Cuckoo Hashing", "Robin Hood Hashing", "Perfect Hashing"]
+        }
+      ]
+    },
+    {
+      "id": "graphs",
+      "title": "Graphs",
+      "icon": "🕸️",
+      "description": "Non-linear structures modeling relationships and networks",
+      "difficulty": "Advanced",
+      "subtopics": [
+        {
+          "name": "Graph Representation",
+          "video": "https://www.youtube.com/embed/5hPfm_uqXmw",
+          "concepts": ["Adjacency Matrix", "Adjacency List", "Edge List", "Weighted Graphs", "Directed vs Undirected"]
+        },
+        {
+          "name": "Graph Traversal",
+          "video": "https://www.youtube.com/embed/N2P7w22tN9c",
+          "concepts": ["BFS", "DFS", "Connected Components", "Cycle Detection", "Bipartite Check"]
+        },
+        {
+          "name": "Shortest Path Algorithms",
+          "video": "https://www.youtube.com/embed/j0OUwduDOS0",
+          "concepts": ["Dijkstra's Algorithm", "Bellman-Ford", "Floyd-Warshall", "A* Algorithm", "0-1 BFS"]
+        },
+        {
+          "name": "Minimum Spanning Tree",
+          "video": "https://www.youtube.com/embed/4ZlRH0eK-qQ",
+          "concepts": ["Kruskal's Algorithm", "Prim's Algorithm", "Union Find (Disjoint Set)", "Cut Property", "Cycle Property"]
+        },
+        {
+          "name": "Advanced Graph Algorithms",
+          "video": "https://www.youtube.com/embed/tWVWeAqZ0WU",
+          "concepts": ["Topological Sort", "Strongly Connected Components (Kosaraju/Tarjan)", "Bridges & Articulation Points", "Network Flow", "Ford-Fulkerson"]
+        }
+      ]
+    },
+    {
+      "id": "sorting",
+      "title": "Sorting Algorithms",
+      "icon": "📈",
+      "description": "Systematic arrangement of data for efficient access",
+      "difficulty": "Beginner to Advanced",
+      "subtopics": [
+        {
+          "name": "Comparison-Based Sorting",
+          "video": "https://www.youtube.com/embed/WffUZk1pgXE",
+          "concepts": ["Bubble Sort", "Selection Sort", "Insertion Sort", "Merge Sort", "Quick Sort", "Heap Sort"]
+        },
+        {
+          "name": "Linear Time Sorting",
+          "video": "https://www.youtube.com/embed/OGzPmgsI-pQ",
+          "concepts": ["Counting Sort", "Radix Sort", "Bucket Sort", "Stability in Sorting", "In-place Sorting"]
+        },
+        {
+          "name": "Sorting Applications",
+          "video": "https://www.youtube.com/embed/0nlPxaC2lTw",
+          "concepts": ["Custom Comparators", "Partial Sorting (Kth Element)", "Nearly Sorted Arrays", "External Sorting", "String Sorting"]
+        }
+      ]
+    },
+    {
+      "id": "searching",
+      "title": "Searching Algorithms",
+      "icon": "🔍",
+      "description": "Efficient retrieval of information from data structures",
+      "difficulty": "Beginner to Intermediate",
+      "subtopics": [
+        {
+          "name": "Linear Search Variants",
+          "video": "https://www.youtube.com/embed/C46QfTjVCNU",
+          "concepts": ["Sequential Search", "Sentinel Search", "Jump Search", "Interpolation Search"]
+        },
+        {
+          "name": "Binary Search",
+          "video": "https://www.youtube.com/embed/TbbSJrY5GqQ",
+          "concepts": ["Iterative & Recursive", "Lower/Upper Bound", "First/Last Occurrence", "Rotated Sorted Array", "Binary Search on Answer"]
+        },
+        {
+          "name": "Advanced Searching",
+          "video": "https://www.youtube.com/embed/wNOoyZ45SmQ",
+          "concepts": ["Ternary Search", "Exponential Search", "Fibonacci Search", "Search in 2D Matrix", "Median of Two Sorted Arrays"]
+        }
+      ]
+    },
+    {
+      "id": "dynamic-programming",
+      "title": "Dynamic Programming",
+      "icon": "🧩",
+      "description": "Optimization through memoization and optimal substructure",
+      "difficulty": "Advanced",
+      "subtopics": [
+        {
+          "name": "DP Fundamentals",
+          "video": "https://www.youtube.com/embed/oBt53YbR9Kk",
+          "concepts": ["Memoization (Top-down)", "Tabulation (Bottom-up)", "State Transition", "Overlapping Subproblems", "Optimal Substructure"]
+        },
+        {
+          "name": "1D Dynamic Programming",
+          "video": "https://www.youtube.com/embed/ENyox7kNKeY",
+          "concepts": ["Fibonacci", "Climbing Stairs", "House Robber", "Maximum Subarray (Kadane's)", "Jump Game"]
+        },
+        {
+          "name": "2D Dynamic Programming",
+          "video": "https://www.youtube.com/embed/qMky6D6YtXU",
+          "concepts": ["Unique Paths", "Edit Distance", "Longest Common Subsequence", "0/1 Knapsack", "Coin Change"]
+        },
+        {
+          "name": "DP on Strings",
+          "video": "https://www.youtube.com/embed/aJNu_DLyOxY",
+          "concepts": ["Palindrome Partitioning", "Longest Palindromic Subsequence", "Regex Matching", "Wildcard Matching", "Interleaving String"]
+        },
+        {
+          "name": "DP on Trees & Graphs",
+          "video": "https://www.youtube.com/embed/zSYnwA3HgmQ",
+          "concepts": ["Tree DP", "House Robber III", "Longest Path in Binary Tree", "DP on DAGs", "Bit Mask DP"]
+        }
+      ]
+    },
+    {
+      "id": "greedy",
+      "title": "Greedy Algorithms",
+      "icon": "💰",
+      "description": "Local optimal choices leading to global optimum",
+      "difficulty": "Intermediate",
+      "subtopics": [
+        {
+          "name": "Greedy Fundamentals",
+          "video": "https://www.youtube.com/embed/v0eQ4nXJjsk",
+          "concepts": ["Activity Selection", "Fractional Knapsack", "Huffman Coding", "Task Scheduling", "Interval Partitioning"]
+        },
+        {
+          "name": "Advanced Greedy",
+          "video": "https://www.youtube.com/embed/-wqKvpYGg1I",
+          "concepts": ["Jump Game II", "Gas Station", "Candy Distribution", "Reconstruct Queue by Height", "Remove K Digits"]
+        }
+      ]
+    },
+    {
+      "id": "backtracking",
+      "title": "Backtracking",
+      "icon": "↩️",
+      "description": "Systematic exploration of solution space",
+      "difficulty": "Advanced",
+      "subtopics": [
+        {
+          "name": "Backtracking Fundamentals",
+          "video": "https://www.youtube.com/embed/DKCbsiDBN6c",
+          "concepts": ["N-Queens", "Sudoku Solver", "Permutations", "Combinations", "Subsets"]
+        },
+        {
+          "name": "Advanced Backtracking",
+          "video": "https://www.youtube.com/embed/p9m2LHBW81M",
+          "concepts": ["Word Search", "Palindrome Partitioning", "Expression Add Operators", "Beautiful Arrangement", "Tiling Problem"]
+        }
+      ]
+    },
+    {
+      "id": "bit-manipulation",
+      "title": "Bit Manipulation",
+      "icon": "⚡",
+      "description": "Low-level optimization using binary operations",
+      "difficulty": "Intermediate",
+      "subtopics": [
+        {
+          "name": "Bit Operations",
+          "video": "https://www.youtube.com/embed/NLKQEOgBAnw",
+          "concepts": ["AND, OR, XOR, NOT", "Left/Right Shift", "Bit Masking", "Counting Set Bits", "Power of Two Check"]
+        },
+        {
+          "name": "Bit Manipulation Tricks",
+          "video": "https://www.youtube.com/embed/LGrE0siZ-ZA",
+          "concepts": ["Single Number (XOR)", "Missing Number", "Reverse Bits", "Number of 1 Bits", "Bitwise DP"]
+        }
+      ]
+    },
+    {
+      "id": "tries",
+      "title": "Trie (Prefix Tree)",
+      "icon": "🌲",
+      "description": "Tree-based efficient string storage and retrieval",
+      "difficulty": "Intermediate",
+      "subtopics": [
+        {
+          "name": "Trie Operations",
+          "video": "https://www.youtube.com/embed/oobqoCJlHA0",
+          "concepts": ["Insertion", "Search", "Prefix Search", "Deletion", "Auto-complete"]
+        },
+        {
+          "name": "Advanced Trie Applications",
+          "video": "https://www.youtube.com/embed/AXjmTQ8LEoI",
+          "concepts": ["Word Search II", "Design Search Autocomplete System", "Add and Search Word", "Maximum XOR of Two Numbers", "Concatenated Words"]
+        }
+      ]
+    },
+    {
+      "id": "segment-trees",
+      "title": "Segment Trees & Fenwick",
+      "icon": "📊",
+      "description": "Range query data structures for efficient updates",
+      "difficulty": "Advanced",
+      "subtopics": [
+        {
+          "name": "Segment Tree",
+          "video": "https://www.youtube.com/embed/rYBtViWXYeI",
+          "concepts": ["Build", "Range Query", "Point Update", "Range Update", "Lazy Propagation"]
+        },
+        {
+          "name": "Fenwick Tree (Binary Indexed Tree)",
+          "video": "https://www.youtube.com/embed/CWDQJGaN1gY",
+          "concepts": ["Prefix Sum", "Point Update", "Range Update (BIT)", "Inversion Count", "2D BIT"]
+        }
+      ]
+    }
+  ],
+  "practice_problems": [
+    {
+      "id": 1,
+      "title": "Two Sum",
+      "difficulty": "Easy",
+      "category": "Arrays",
+      "link": "https://leetcode.com/problems/two-sum/",
+      "concepts": ["Hash Map", "Two Pointers"]
+    },
+    {
+      "id": 2,
+      "title": "Best Time to Buy and Sell Stock",
+      "difficulty": "Easy",
+      "category": "Arrays",
+      "link": "https://leetcode.com/problems/best-time-to-buy-and-sell-stock/",
+      "concepts": ["Kadane's Algorithm", "DP"]
+    },
+    {
+      "id": 3,
+      "title": "Contains Duplicate",
+      "difficulty": "Easy",
+      "category": "Arrays",
+      "link": "https://leetcode.com/problems/contains-duplicate/",
+      "concepts": ["Hash Set", "Sorting"]
+    },
+    {
+      "id": 4,
+      "title": "Product of Array Except Self",
+      "difficulty": "Medium",
+      "category": "Arrays",
+      "link": "https://leetcode.com/problems/product-of-array-except-self/",
+      "concepts": ["Prefix Product", "Two Pass"]
+    },
+    {
+      "id": 5,
+      "title": "Maximum Subarray",
+      "difficulty": "Medium",
+      "category": "Arrays",
+      "link": "https://leetcode.com/problems/maximum-subarray/",
+      "concepts": ["Kadane's Algorithm", "Divide and Conquer"]
+    },
+    {
+      "id": 6,
+      "title": "Maximum Product Subarray",
+      "difficulty": "Medium",
+      "category": "Arrays",
+      "link": "https://leetcode.com/problems/maximum-product-subarray/",
+      "concepts": ["DP", "Two Minimums Tracking"]
+    },
+    {
+      "id": 7,
+      "title": "Find Minimum in Rotated Sorted Array",
+      "difficulty": "Medium",
+      "category": "Arrays",
+      "link": "https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/",
+      "concepts": ["Binary Search", "Pivot Finding"]
+    },
+    {
+      "id": 8,
+      "title": "Search in Rotated Sorted Array",
+      "difficulty": "Medium",
+      "category": "Arrays",
+      "link": "https://leetcode.com/problems/search-in-rotated-sorted-array/",
+      "concepts": ["Binary Search", "Modified Conditions"]
+    },
+    {
+      "id": 9,
+      "title": "3Sum",
+      "difficulty": "Medium",
+      "category": "Arrays",
+      "link": "https://leetcode.com/problems/3sum/",
+      "concepts": ["Two Pointers", "Sorting", "Duplicate Skipping"]
+    },
+    {
+      "id": 10,
+      "title": "Container With Most Water",
+      "difficulty": "Medium",
+      "category": "Arrays",
+      "link": "https://leetcode.com/problems/container-with-most-water/",
+      "concepts": ["Two Pointers", "Area Calculation"]
+    },
+    {
+      "id": 11,
+      "title": "Valid Parentheses",
+      "difficulty": "Easy",
+      "category": "Stack",
+      "link": "https://leetcode.com/problems/valid-parentheses/",
+      "concepts": ["Stack", "Matching Pairs"]
+    },
+    {
+      "id": 12,
+      "title": "Min Stack",
+      "difficulty": "Medium",
+      "category": "Stack",
+      "link": "https://leetcode.com/problems/min-stack/",
+      "concepts": ["Auxiliary Stack", "Min Tracking"]
+    },
+    {
+      "id": 13,
+      "title": "Evaluate Reverse Polish Notation",
+      "difficulty": "Medium",
+      "category": "Stack",
+      "link": "https://leetcode.com/problems/evaluate-reverse-polish-notation/",
+      "concepts": ["Stack", "Postfix Evaluation"]
+    },
+    {
+      "id": 14,
+      "title": "Daily Temperatures",
+      "difficulty": "Medium",
+      "category": "Stack",
+      "link": "https://leetcode.com/problems/daily-temperatures/",
+      "concepts": ["Monotonic Stack", "Next Greater Element"]
+    },
+    {
+      "id": 15,
+      "title": "Merge Two Sorted Lists",
+      "difficulty": "Easy",
+      "category": "Linked List",
+      "link": "https://leetcode.com/problems/merge-two-sorted-lists/",
+      "concepts": ["Two Pointers", "Dummy Node"]
+    },
+    {
+      "id": 16,
+      "title": "Linked List Cycle",
+      "difficulty": "Easy",
+      "category": "Linked List",
+      "link": "https://leetcode.com/problems/linked-list-cycle/",
+      "concepts": ["Floyd's Cycle", "Two Pointers"]
+    },
+    {
+      "id": 17,
+      "title": "Reverse Linked List",
+      "difficulty": "Easy",
+      "category": "Linked List",
+      "link": "https://leetcode.com/problems/reverse-linked-list/",
+      "concepts": ["Iterative", "Recursive", "Pointer Manipulation"]
+    },
+    {
+      "id": 18,
+      "title": "Merge k Sorted Lists",
+      "difficulty": "Hard",
+      "category": "Linked List",
+      "link": "https://leetcode.com/problems/merge-k-sorted-lists/",
+      "concepts": ["Divide and Conquer", "Heap", "Min Priority Queue"]
+    },
+    {
+      "id": 19,
+      "title": "Remove Nth Node From End of List",
+      "difficulty": "Medium",
+      "category": "Linked List",
+      "link": "https://leetcode.com/problems/remove-nth-node-from-end-of-list/",
+      "concepts": ["Two Pointers", "Fast and Slow"]
+    },
+    {
+      "id": 20,
+      "title": "Add Two Numbers",
+      "difficulty": "Medium",
+      "category": "Linked List",
+      "link": "https://leetcode.com/problems/add-two-numbers/",
+      "concepts": ["Digit by Digit", "Carry Handling"]
+    },
+    {
+      "id": 21,
+      "title": "Invert Binary Tree",
+      "difficulty": "Easy",
+      "category": "Trees",
+      "link": "https://leetcode.com/problems/invert-binary-tree/",
+      "concepts": ["Recursion", "DFS", "BFS"]
+    },
+    {
+      "id": 22,
+      "title": "Maximum Depth of Binary Tree",
+      "difficulty": "Easy",
+      "category": "Trees",
+      "link": "https://leetcode.com/problems/maximum-depth-of-binary-tree/",
+      "concepts": ["Recursion", "Level Order"]
+    },
+    {
+      "id": 23,
+      "title": "Same Tree",
+      "difficulty": "Easy",
+      "category": "Trees",
+      "link": "https://leetcode.com/problems/same-tree/",
+      "concepts": ["Recursion", "Simultaneous Traversal"]
+    },
+    {
+      "id": 24,
+      "title": "Subtree of Another Tree",
+      "difficulty": "Easy",
+      "category": "Trees",
+      "link": "https://leetcode.com/problems/subtree-of-another-tree/",
+      "concepts": ["Tree Matching", "Serialization"]
+    },
+    {
+      "id": 25,
+      "title": "Lowest Common Ancestor of a Binary Search Tree",
+      "difficulty": "Easy",
+      "category": "Trees",
+      "link": "https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/",
+      "concepts": ["BST Property", "Path Splitting"]
+    },
+    {
+      "id": 26,
+      "title": "Binary Tree Level Order Traversal",
+      "difficulty": "Medium",
+      "category": "Trees",
+      "link": "https://leetcode.com/problems/binary-tree-level-order-traversal/",
+      "concepts": ["BFS", "Queue", "Level Tracking"]
+    },
+    {
+      "id": 27,
+      "title": "Validate Binary Search Tree",
+      "difficulty": "Medium",
+      "category": "Trees",
+      "link": "https://leetcode.com/problems/validate-binary-search-tree/",
+      "concepts": ["Range Checking", "In-order Validation"]
+    },
+    {
+      "id": 28,
+      "title": "Kth Smallest Element in a BST",
+      "difficulty": "Medium",
+      "category": "Trees",
+      "link": "https://leetcode.com/problems/kth-smallest-element-in-a-bst/",
+      "concepts": ["In-order Traversal", "Counter"]
+    },
+    {
+      "id": 29,
+      "title": "Construct Binary Tree from Preorder and Inorder Traversal",
+      "difficulty": "Medium",
+      "category": "Trees",
+      "link": "https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/",
+      "concepts": ["Recursion", "Index Mapping"]
+    },
+    {
+      "id": 30,
+      "title": "Number of Islands",
+      "difficulty": "Medium",
+      "category": "Graphs",
+      "link": "https://leetcode.com/problems/number-of-islands/",
+      "concepts": ["DFS", "BFS", "Connected Components"]
+    },
+    {
+      "id": 31,
+      "title": "Clone Graph",
+      "difficulty": "Medium",
+      "category": "Graphs",
+      "link": "https://leetcode.com/problems/clone-graph/",
+      "concepts": ["DFS", "BFS", "Hash Map"]
+    },
+    {
+      "id": 32,
+      "title": "Course Schedule",
+      "difficulty": "Medium",
+      "category": "Graphs",
+      "link": "https://leetcode.com/problems/course-schedule/",
+      "concepts": ["Topological Sort", "Cycle Detection"]
+    },
+    {
+      "id": 33,
+      "title": "Pacific Atlantic Water Flow",
+      "difficulty": "Medium",
+      "category": "Graphs",
+      "link": "https://leetcode.com/problems/pacific-atlantic-water-flow/",
+      "concepts": ["Multi-source BFS/DFS", "Reverse Thinking"]
+    },
+    {
+      "id": 34,
+      "title": "Longest Consecutive Sequence",
+      "difficulty": "Medium",
+      "category": "Graphs",
+      "link": "https://leetcode.com/problems/longest-consecutive-sequence/",
+      "concepts": ["Hash Set", "Sequence Building"]
+    },
+    {
+      "id": 35,
+      "title": "Alien Dictionary",
+      "difficulty": "Hard",
+      "category": "Graphs",
+      "link": "https://leetcode.com/problems/alien-dictionary/",
+      "concepts": ["Topological Sort", "Character Order"]
+    },
+    {
+      "id": 36,
+      "title": "Graph Valid Tree",
+      "difficulty": "Medium",
+      "category": "Graphs",
+      "link": "https://leetcode.com/problems/graph-valid-tree/",
+      "concepts": ["Union Find", "Cycle Detection", "Connected"]
+    },
+    {
+      "id": 37,
+      "title": "Climbing Stairs",
+      "difficulty": "Easy",
+      "category": "Dynamic Programming",
+      "link": "https://leetcode.com/problems/climbing-stairs/",
+      "concepts": ["Fibonacci", "Memoization"]
+    },
+    {
+      "id": 38,
+      "title": "House Robber",
+      "difficulty": "Medium",
+      "category": "Dynamic Programming",
+      "link": "https://leetcode.com/problems/house-robber/",
+      "concepts": ["DP", "Decision Making"]
+    },
+    {
+      "id": 39,
+      "title": "Coin Change",
+      "difficulty": "Medium",
+      "category": "Dynamic Programming",
+      "link": "https://leetcode.com/problems/coin-change/",
+      "concepts": ["Unbounded Knapsack", "Bottom-up"]
+    },
+    {
+      "id": 40,
+      "title": "Longest Increasing Subsequence",
+      "difficulty": "Medium",
+      "category": "Dynamic Programming",
+      "link": "https://leetcode.com/problems/longest-increasing-subsequence/",
+      "concepts": ["DP", "Binary Search", "Patience Sort"]
+    },
+    {
+      "id": 41,
+      "title": "Word Break",
+      "difficulty": "Medium",
+      "category": "Dynamic Programming",
+      "link": "https://leetcode.com/problems/word-break/",
+      "concepts": ["DP", "Hash Set", "String Matching"]
+    },
+    {
+      "id": 42,
+      "title": "Combination Sum IV",
+      "difficulty": "Medium",
+      "category": "Dynamic Programming",
+      "link": "https://leetcode.com/problems/combination-sum-iv/",
+      "concepts": ["DP", "Unbounded Knapsack", "Permutation"]
+    },
+    {
+      "id": 43,
+      "title": "Edit Distance",
+      "difficulty": "Hard",
+      "category": "Dynamic Programming",
+      "link": "https://leetcode.com/problems/edit-distance/",
+      "concepts": ["2D DP", "String Matching"]
+    },
+    {
+      "id": 44,
+      "title": "Regular Expression Matching",
+      "difficulty": "Hard",
+      "category": "Dynamic Programming",
+      "link": "https://leetcode.com/problems/regular-expression-matching/",
+      "concepts": ["2D DP", "Pattern Matching"]
+    },
+    {
+      "id": 45,
+      "title": "Climbing Stairs",
+      "difficulty": "Easy",
+      "category": "Dynamic Programming",
+      "link": "https://leetcode.com/problems/climbing-stairs/",
+      "concepts": ["Fibonacci", "Memoization"]
+    },
+    {
+      "id": 46,
+      "title": "Meeting Rooms II",
+      "difficulty": "Medium",
+      "category": "Intervals",
+      "link": "https://leetcode.com/problems/meeting-rooms-ii/",
+      "concepts": ["Sorting", "Min Heap", "Sweep Line"]
+    },
+    {
+      "id": 47,
+      "title": "Merge Intervals",
+      "difficulty": "Medium",
+      "category": "Intervals",
+      "link": "https://leetcode.com/problems/merge-intervals/",
+      "concepts": ["Sorting", "Interval Merging"]
+    },
+    {
+      "id": 48,
+      "title": "Insert Interval",
+      "difficulty": "Medium",
+      "category": "Intervals",
+      "link": "https://leetcode.com/problems/insert-interval/",
+      "concepts": ["Interval Handling", "Case Analysis"]
+    },
+    {
+      "id": 49,
+      "title": "Non-overlapping Intervals",
+      "difficulty": "Medium",
+      "category": "Intervals",
+      "link": "https://leetcode.com/problems/non-overlapping-intervals/",
+      "concepts": ["Greedy", "Sorting by End"]
+    },
+    {
+      "id": 50,
+      "title": "Find Median from Data Stream",
+      "difficulty": "Hard",
+      "category": "Heap",
+      "link": "https://leetcode.com/problems/find-median-from-data-stream/",
+      "concepts": ["Two Heaps", "Max/Min Heap"]
+    }
+  ]
+}

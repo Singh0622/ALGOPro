@@ -1,0 +1,277 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="hero-section py-5 mb-5">
+    <div class="container text-center">
+        <h1 class="display-3 fw-bold mb-4">Master Data Structures & Algorithms</h1>
+        <p class="lead mb-4">Interactive learning platform with AI-powered explanations, quizzes, and curated video content</p>
+        <div class="d-flex justify-content-center gap-3">
+            <a href="#topics" class="btn btn-primary btn-lg">Start Learning</a>
+            <a href="/practice" class="btn btn-outline-light btn-lg">Practice Problems</a>
+        </div>
+    </div>
+</div>
+
+<div class="container" id="topics">
+    <div class="row mb-4">
+        <div class="col-12">
+            <h2 class="text-center mb-4">Learning Path</h2>
+            <div class="progress-track">
+                <div class="progress-line"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        {% for topic in topics %}
+        <div class="col-md-6 col-lg-4">
+            <div class="card topic-card h-100 border-0 shadow-sm" data-difficulty="{{ topic.difficulty }}">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <span class="display-4">{{ topic.icon }}</span>
+                        <div class="d-flex gap-2">
+                            {% if quiz_progress.get(topic.id) %}
+                                {% if quiz_progress[topic.id].passed %}
+                                <span class="badge bg-success" title="Quiz Passed!">✓ {{ quiz_progress[topic.id].score }}%</span>
+                                {% else %}
+                                <span class="badge bg-warning" title="Quiz Attempted">{{ quiz_progress[topic.id].score }}%</span>
+                                {% endif %}
+                            {% endif %}
+                            <span class="badge {% if 'Beginner' in topic.difficulty %}bg-success{% elif 'Intermediate' in topic.difficulty %}bg-warning{% else %}bg-danger{% endif %}">
+                                {{ topic.difficulty }}
+                            </span>
+                        </div>
+                    </div>
+                    <h5 class="card-title fw-bold">{{ topic.title }}</h5>
+                    <p class="card-text text-muted">{{ topic.description }}</p>
+                    
+                    <!-- Progress Bar for Topic -->
+                    <div class="progress mb-3" style="height: 6px;">
+                        <div class="progress-bar bg-success" style="width: {{ quiz_progress.get(topic.id, {}).get('score', 0) }}%"></div>
+                    </div>
+                    
+                    <div class="d-flex gap-2 mt-3">
+                        <a href="/topic/{{ topic.id }}" class="btn btn-outline-primary flex-fill">Learn</a>
+                        <a href="/generate-quiz/{{ topic.id }}" class="btn btn-primary flex-fill position-relative">
+                            📝 Quiz
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                AI
+                                <span class="visually-hidden">AI Generated</span>
+                            </span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="container mt-4 mb-2" id="stats">
+    <div class="row g-4">
+        <div class="col-md-3 text-center">
+            <div class="stat-card p-4 bg-white rounded shadow-sm">
+                <div class="display-4 text-primary">{{ topics|length }}</div>
+                <div class="text-muted">Topics</div>
+            </div>
+        </div>
+        <div class="col-md-3 text-center">
+            <div class="stat-card p-4 bg-white rounded shadow-sm">
+                <div class="display-4 text-success">40+</div>
+                <div class="text-muted">Video Lessons</div>
+            </div>
+        </div>
+        <div class="col-md-3 text-center">
+            <div class="stat-card p-4 bg-white rounded shadow-sm">
+                <div class="display-4 text-warning">10</div>
+                <div class="text-muted">Quizzes</div>
+            </div>
+        </div>
+        <div class="col-md-3 text-center">
+            <div class="stat-card p-4 bg-white rounded shadow-sm">
+                <div class="display-4 text-info">100+</div>
+                <div class="text-muted">Practice Problems</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-3" id="features">
+    <h2 class="text-center mb-4">Platform Features</h2>
+    <div class="row g-4">
+        <div class="col-md-4 text-center">
+            <div class="feature-icon mb-3">🤖</div>
+            <h4>AI Tutor</h4>
+            <p class="text-muted">Get personalized explanations and code reviews powered by AI</p>
+        </div>
+        <div class="col-md-4 text-center">
+            <div class="feature-icon mb-3">📝</div>
+            <h4>Interactive Quizzes</h4>
+            <p class="text-muted">Test your knowledge with timed quizzes, instant feedback, and detailed explanations</p>
+        </div>
+        <div class="col-md-4 text-center">
+            <div class="feature-icon mb-3">📺</div>
+            <h4>Video Integration</h4>
+            <p class="text-muted">Curated YouTube videos for every concept with interactive timestamps</p>
+        </div>
+        <div class="col-md-4 text-center">
+            <div class="feature-icon mb-3">🎨</div>
+            <h4>Visual Learning</h4>
+            <p class="text-muted">Step-by-step algorithm visualizations and interactive animations</p>
+        </div>
+        <div class="col-md-4 text-center">
+            <div class="feature-icon mb-3">📊</div>
+            <h4>Progress Tracking</h4>
+            <p class="text-muted">Track your quiz scores and learning progress across all topics</p>
+        </div>
+        <div class="col-md-4 text-center">
+            <div class="feature-icon mb-3">💻</div>
+            <h4>Code Analysis</h4>
+            <p class="text-muted">Get instant feedback on your code with AI-powered analysis</p>
+        </div>
+    </div>
+</div>
+
+<!-- Overall Progress Section -->
+{% if quiz_progress %}
+<div class="container mt-5 mb-5">
+    <div class="card border-0 shadow-lg overflow-hidden">
+        <div class="card-header bg-primary text-white p-4">
+            <h4 class="mb-0 fw-bold">📊 Your Learning Progress</h4>
+        </div>
+        <div class="card-body p-4">
+            <div class="row align-items-center">
+                <!-- Chart Column -->
+                <div class="col-lg-7 mb-4 mb-lg-0">
+                    <div class="chart-container" style="position: relative; height: 400px; width: 100%;">
+                        <canvas id="progressChart"></canvas>
+                    </div>
+                </div>
+                <!-- Stats Column -->
+                <div class="col-lg-5">
+                    <div class="ps-lg-4">
+                        <h5 class="fw-bold mb-4 text-primary">Quiz Statistics</h5>
+                        
+                        <div class="list-group list-group-flush">
+                            <div class="list-group-item d-flex justify-content-between align-items-center px-0 py-3">
+                                <span class="text-muted">Quizzes Completed</span>
+                                <span class="badge bg-primary rounded-pill fs-6">{{ quiz_progress|length }}</span>
+                            </div>
+                            <div class="list-group-item d-flex justify-content-between align-items-center px-0 py-3">
+                                <span class="text-muted">Average Score</span>
+                                <span class="badge bg-success rounded-pill fs-6">
+                                    {{ (quiz_progress.values()|map(attribute='score')|sum / quiz_progress|length)|round(1) }}%
+                                </span>
+                            </div>
+                            <div class="list-group-item d-flex justify-content-between align-items-center px-0 py-3">
+                                <span class="text-muted">Passed Quizzes</span>
+                                <span class="badge bg-success rounded-pill fs-6">
+                                    {{ quiz_progress.values()|selectattr('passed', 'equalto', true)|list|length }}
+                                </span>
+                            </div>
+                            <div class="list-group-item d-flex justify-content-between align-items-center px-0 py-3">
+                                <span class="text-muted">Best Score</span>
+                                <span class="badge bg-info rounded-pill fs-6">
+                                    {{ quiz_progress.values()|map(attribute='score')|max }}%
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Mini progress bars per topic -->
+                        <div class="mt-4 pt-3 border-top">
+                            <h6 class="fw-bold mb-3">Topic Breakdown</h6>
+                            {% for topic_id, progress in quiz_progress.items() %}
+                            <div class="mb-2">
+                                <div class="d-flex justify-content-between small mb-1">
+                                    <span class="text-truncate" style="max-width: 70%;">{{ topic_id.replace('-', ' ').title() }}</span>
+                                    <span class="fw-bold">{{ progress.score }}%</span>
+                                </div>
+                                <div class="progress" style="height: 8px;">
+                                    <div class="progress-bar {% if progress.passed %}bg-success{% else %}bg-warning{% endif %}" 
+                                         style="width: {{ progress.score }}%"></div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}
+
+{% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+// Progress Chart
+{% if quiz_progress %}
+const ctx = document.getElementById('progressChart').getContext('2d');
+const progressData = {{ quiz_progress|tojson }};
+const labels = Object.keys(progressData).map(id => {
+    return id.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+});
+const scores = Object.values(progressData).map(p => p.score);
+const passed = Object.values(progressData).map(p => p.passed ? 'rgba(25, 135, 84, 0.8)' : 'rgba(255, 193, 7, 0.8)');
+
+new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: labels,
+        datasets: [{
+            label: 'Quiz Score (%)',
+            data: scores,
+            backgroundColor: passed,
+            borderColor: passed.map(c => c.replace('0.8', '1')),
+            borderWidth: 2,
+            borderRadius: 8,
+            barThickness: 40
+        }]
+    },
+    options: {
+        indexAxis: 'y',  // Horizontal bars
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                display: false
+            },
+            tooltip: {
+                callbacks: {
+                    label: function(context) {
+                        return context.parsed.x + '%';
+                    }
+                }
+            }
+        },
+        scales: {
+            x: {
+                beginAtZero: true,
+                max: 100,
+                grid: {
+                    color: 'rgba(0,0,0,0.1)'
+                },
+                ticks: {
+                    callback: function(value) {
+                        return value + '%';
+                    }
+                }
+            },
+            y: {
+                grid: {
+                    display: false
+                },
+                ticks: {
+                    font: {
+                        size: 14,
+                        weight: 'bold'
+                    }
+                }
+            }
+        }
+    }
+});
+{% endif %}
+</script>
+{% endblock %}
