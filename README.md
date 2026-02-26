@@ -58,24 +58,25 @@ ALGOPro addresses these challenges through:
 ## 📁 Project Structure
 
 ALGOPro/
-├── app.py                      # Main Flask application
-├── requirements.txt            # Python dependencies
-├── .env                        # Environment variables (not in repo)
-├── .env.example                # Environment template
-├── .gitignore                  # Git ignore rules
-├── data/
-│   ├── dsa_content.json        # Topic structure & metadata
-│   └── quiz_templates.json     # Quiz generation templates
-├── templates/                  # Jinja2 HTML templates
-│   ├── base.html
-│   ├── index.html
-│   ├── topic.html
-│   ├── quiz.html
-│   ├── practice.html
-│   └── generate_quiz.html
-└── static/
-├── css/style.css          # Custom styles
-└── js/main.js             # Client-side logic
+
+      ├── app.py                      # Main Flask application
+      ├── requirements.txt            # Python dependencies
+      ├── .env                        # Environment variables (not in repo)
+      ├── .env.example                # Environment template
+      ├── .gitignore                  # Git ignore rules
+      ├── data/
+      │   ├── dsa_content.json        # Topic structure & metadata
+      │   └── quiz_templates.json     # Quiz generation templates
+      ├── templates/                  # Jinja2 HTML templates
+      │   ├── base.html
+      │   ├── index.html
+      │   ├── topic.html
+      │   ├── quiz.html
+      │   ├── practice.html
+      │   └── generate_quiz.html
+      └── static/
+      ├── css/style.css          # Custom styles
+      └── js/main.js             # Client-side logic
 
 
 ## ⚙️ Installation & Setup
@@ -95,10 +96,10 @@ ALGOPro/
 2. **Create virtual environment**
    python -m venv venv
 
-    # Windows
+    Windows-
     venv\Scripts\activate
 
-    # Mac/Linux
+    Mac/Linux-
     source venv/bin/activate
 3. **Install dependencies**
     pip install -r requirements.txt
@@ -126,14 +127,14 @@ patterns = [
     r'\d+\.'               # "1. What..."
 ]
 
-# 2. Code block preservation
-# Extract ```code``` → placeholders → parse → restore
+2. Code block preservation
+Extract ```code``` → placeholders → parse → restore
 
-# 3. Component extraction
-# Question text → Options → Correct answer → Explanation
+3. Component extraction
+Question text → Options → Correct answer → Explanation
 
-# 4. Validation & auto-repair
-# Ensures 4 options, infers missing answers, fills placeholders
+4. Validation & auto-repair
+Ensures 4 options, infers missing answers, fills placeholders
 
 Success Rate: Handles 95% of LLM output variations.
 📊 Features in Detail
@@ -162,9 +163,10 @@ Practice Problems
 * Direct links to solve
 * Local progress tracking
 
-🔒 Security Measures
-✅ API keys stored in environment variables
-✅ .env excluded from Git (.gitignore)
-✅ HTML escaping for XSS prevention
-✅ Session-based user state management
-✅ No sensitive data in client-side code
+#.🔒 Security Measures
+
+      ✅ API keys stored in environment variables
+      ✅ .env excluded from Git (.gitignore)
+      ✅ HTML escaping for XSS prevention
+      ✅ Session-based user state management
+      ✅ No sensitive data in client-side code
