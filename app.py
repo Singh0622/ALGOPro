@@ -74,7 +74,6 @@ def parse_quiz_from_llm_response(text):
     
     # Clean up the text - normalize line endings
     text = text.replace('\r\n', '\n').replace('\r', '\n').strip()
-    print(f"Raw LLM response:\n{text[:500]}...")
     
     # Split by question patterns - more flexible matching
     question_patterns = [
@@ -95,22 +94,18 @@ def parse_quiz_from_llm_response(text):
         if len(blocks) >= 1:
             question_blocks = blocks
             used_pattern = pattern
-            print(f"Using pattern: {pattern[:50]}...")
             break
     
     if not question_blocks:
         # Fallback: split by double newlines and filter for question-like content
         blocks = text.split('\n\n')
         question_blocks = [b.strip() for b in blocks if len(b.strip()) > 30]
-        print(f"Fallback split, found {len(question_blocks)} blocks")
     
-    print(f"Processing {len(question_blocks)} potential question blocks")
     
     for i, block in enumerate(question_blocks):
         try:
             block = block.strip()
             if len(block) < 30:  # Too short to be valid
-                print(f"Block {i} too short ({len(block)} chars), skipping")
                 continue
             
             # Pre-process: handle code blocks by marking them
@@ -180,7 +175,6 @@ def parse_quiz_from_llm_response(text):
             
             # Validate question text
             if len(question_text) < 10 or question_text.lower() in ['question', 'q']:
-                print(f"Block {i} has invalid question text: {question_text[:50]}")
                 continue
             
             # Parse options with strict patterns
@@ -284,13 +278,11 @@ def parse_quiz_from_llm_response(text):
                 'correct': correct,
                 'explanation': explanation[:350]  # Remove html.escape()
             })
-            print(f"Parsed question {len(questions)}: {question_text[:50]}... Options: {list(options.keys())}, Correct: {correct}")
             
         except Exception as e:
             print(f"ERROR parsing question block {i}: {e}")
             continue
     
-    print(f"Total parsed questions: {len(questions)}")
     return questions
 
 def generate_quiz_with_llm(topic_id, difficulty='mixed', num_questions=5):
@@ -410,7 +402,6 @@ def get_fallback_quiz(topic_id, difficulty, num_questions):
 @app.route('/')
 def index():
     quiz_progress = session.get('quiz_progress', {})
-    print(f"DEBUG: quiz_progress = {quiz_progress}")  # Add this line
     return render_template('index.html', topics=DSA_CONTENT['topics'], quiz_progress=quiz_progress)
 
 @app.route('/topic/<topic_id>')
@@ -470,10 +461,8 @@ def take_quiz(topic_id):
 
     for q in quiz_data['questions']:
         q['question_html'] = markdown.markdown(q['question'], extensions=['fenced_code'])
-        # q['explanation_html'] = markdown.markdown(q['explanation'], extensions=['fenced_code'])
     
     # DEBUG: Print quiz data
-    print(f"Quiz data: {len(quiz_data['questions'])} questions")
     for i, q in enumerate(quiz_data['questions']):
         print(f"Q{i+1}: {q['question'][:50]}... Options: {list(q['options'].keys())}")
     
@@ -497,7 +486,6 @@ def submit_quiz():
     questions = quiz_data['questions']
     topic_id = quiz_session['topic_id']
     
-    print(f"Quiz has {len(questions)} questions")
     
     correct_count = 0
     results = []
@@ -507,7 +495,6 @@ def submit_quiz():
         correct_answer = question['correct'].upper()
         is_correct = user_answer == correct_answer
         
-        print(f"Q{i}: User={user_answer}, Correct={correct_answer}, Match={is_correct}")
         
         if is_correct:
             correct_count += 1
