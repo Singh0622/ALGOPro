@@ -225,7 +225,7 @@ function toggleAIFullscreen() {
         // Hide code helper when in fullscreen
         codeHelperCard.classList.add('d-none');
         
-        fullscreenIcon.textContent = '⛶';
+        fullscreenIcon.textContent = '✖';
         fullscreenIcon.title = 'Exit Full Screen';
     } else {
         // Restore split view
@@ -240,6 +240,52 @@ function toggleAIFullscreen() {
         
         // Show code helper
         codeHelperCard.classList.remove('d-none');
+        
+        fullscreenIcon.textContent = '⛶';
+        fullscreenIcon.title = 'Full Screen';
+    }
+}
+
+function toggleCodeFullscreen() {
+    const topicSection = document.getElementById('topic-section');
+    const sidebarSection = document.getElementById('sidebar-section');
+    const codeHelperCard = document.getElementById('code-helper-card');
+    const aiAssistantCard = document.getElementById('ai-assistant-card');
+    const codeTextarea = document.getElementById('code-input');
+    const codeAnalysis = document.getElementById('code-analysis');
+    const fullscreenIcon = document.getElementById('code-fullscreen-icon');
+    
+    isCodeFullscreen = !isCodeFullscreen;
+    
+    if (isCodeFullscreen) {
+        // Expand Code to full width
+        topicSection.classList.add('d-none');
+        sidebarSection.classList.remove('col-lg-6');
+        sidebarSection.classList.add('col-12');
+        
+        // Expand Code Helper card
+        codeHelperCard.style.height = 'calc(100vh - 150px)';
+        codeTextarea.style.height = 'calc(100vh - 300px)';
+        codeTextarea.style.maxHeight = 'calc(100vh - 300px)';
+        
+        // Hide AI assistant when in fullscreen
+        aiAssistantCard.classList.add('d-none');
+        
+        fullscreenIcon.textContent = '✖';
+        fullscreenIcon.title = 'Exit Full Screen';
+    } else {
+        // Restore split view
+        topicSection.classList.remove('d-none');
+        sidebarSection.classList.remove('col-12');
+        sidebarSection.classList.add('col-lg-6');
+        
+        // Restore Code Helper card
+        codeHelperCard.style.height = '';
+        codeTextarea.style.height = '';
+        codeTextarea.style.maxHeight = '';
+        
+        // Show AI assistant
+        aiAssistantCard.classList.remove('d-none');
         
         fullscreenIcon.textContent = '⛶';
         fullscreenIcon.title = 'Full Screen';
