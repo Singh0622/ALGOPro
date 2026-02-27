@@ -626,7 +626,7 @@ def code_help():
         return jsonify({'error': 'AI service not configured'}), 503
     
     prompt = f"""
-    Analyze this {language} code for a DSA problem:
+    You are a code reviewer and debugging assistant. Analyze the following {language} code:
     
     ```{language}
     {code}
