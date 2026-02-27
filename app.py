@@ -639,7 +639,7 @@ def code_help():
     2. Optimization suggestions
     3. Explanation of the logic
     4. Corrected code if needed
-    For every section try to explain in only 150 words
+    
     Be constructive and educational.
     """
     
