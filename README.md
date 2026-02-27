@@ -119,11 +119,12 @@ ALGOPro/
 The platform's robustness comes from a multi-layer parsing strategy:
     # 1. Multi-pattern question segmentation
 patterns = [
-    r'Question \d+:',      # "Question 1:"
-    r'Q\d+:',              # "Q1:"
-    r'#{1,3} Question',    # "### Question 1"
-    r'\*\*Question',       # "**Question 1**"
-    r'\d+\.'               # "1. What..."
+
+          r'Question \d+:',      # "Question 1:"
+          r'Q\d+:',              # "Q1:"
+          r'#{1,3} Question',    # "### Question 1"
+          r'\*\*Question',       # "**Question 1**"
+          r'\d+\.'               # "1. What..."
 ]
 
 2. Code block preservation
