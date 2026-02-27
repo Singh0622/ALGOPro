@@ -390,6 +390,30 @@ body {
     line-height: 1.5;
 }
 
+.question-text pre {
+    background: #1e1e1e;
+    color: #d4d4d4;
+    border-radius: 8px;
+    padding: 16px;
+    margin: 16px 0;
+    overflow-x: auto;
+}
+
+.question-text code {
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    font-size: 14px;
+}
+
+.question-text pre code {
+    background: transparent;
+    padding: 0;
+    color: inherit;
+}
+
+.question-text p {
+    margin-bottom: 12px;
+}
+
 /* OPTIONS - COMPLETELY ISOLATED */
 
 .options-list {
