@@ -90,8 +90,11 @@
 
                 <!-- Code Helper - Bottom Half -->
                 <div class="card border-0 shadow-sm" id="code-helper-card">
-                    <div class="card-header bg-success text-white">
+                    <div class="card-header bg-success text-white d-flex justify-content-between align-items-center">
                         <h5 class="mb-0">💻 Code Helper</h5>
+                            <button class="btn btn-sm btn-outline-light" onclick="toggleCodeFullscreen()" title="Toggle Full Screen">
+                                <span id="code-fullscreen-icon">⛶</span>
+                            </button>
                     </div>
                     <div class="card-body">
                         <textarea class="form-control mb-2" id="code-input" rows="6" placeholder="Paste your code here..."></textarea>
