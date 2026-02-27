@@ -67,7 +67,7 @@
                     </div>
                     
                     <div class="card-body">
-                        <h5 class="card-title mb-4">{{ question.question|safe }}</h5>
+                        <div class="question-text mb-4">{{ question.question_html|safe }}</div>
                         
                         <div class="options-list" id="options-list-{{ question_idx }}">
                             {% for key, value in question.options.items() %}
