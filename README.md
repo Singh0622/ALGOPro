@@ -32,9 +32,8 @@ ALGOPro addresses these challenges through:
 
 ## 🚀 Live Demo
 
-**Deployed Application:** [https://algopro.onrender.com](https://algopro.onrender.com)
+**Deployed Application:** [https://algopro.onrender.com](https://algopro-ena1.onrender.com)
 
-**Video Demo:** [YouTube Link](your-youtube-link)
 
 ## 🛠️ Tech Stack
 
