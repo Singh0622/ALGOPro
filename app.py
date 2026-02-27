@@ -460,7 +460,7 @@ def take_quiz(topic_id):
     topic_data = get_topic_by_id(topic_id)
 
     for q in quiz_data['questions']:
-        q['question_html'] = markdown.markdown(q['question'], extensions=['fenced_code'])
+        q['question_html'] = markdown.markdown(q['question'], extensions=['fenced_code', 'nl2br'])
     
     # DEBUG: Print quiz data
     for i, q in enumerate(quiz_data['questions']):
