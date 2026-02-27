@@ -265,10 +265,10 @@ def parse_quiz_from_llm_response(text):
             if not explanation:
                 explanation = f"The correct answer is {correct}. Review the related concepts to understand why."
             
-            question_text = question_text[:250].strip()
+            question_text = question_text[:1000].strip()
             
             questions.append({
-                'question': question_text[:250].strip(),  # Remove html.escape()
+                'question': question_text[:1000].strip(),  # Remove html.escape()
                 'options': {
                     'A': options.get('A', 'Option A')[:120],  # Remove html.escape()
                     'B': options.get('B', 'Option B')[:120],
@@ -322,13 +322,14 @@ IMPORTANT RULES:
 3. Questions should be practical and test understanding, not just memorization
 4. Include code snippets where relevant
 5. Make sure "Correct:" clearly states which option (A, B, C, or D) is correct
-6. Explanations should teach the concept
-7. Do not use markdown formatting like ** or ##
-8. Ensure options are complete sentences or code, not single words when possible
+6. For code questions, put code in triple backticks with actual newlines, NOT inline
+7. Explanations should teach the concept
+8. Do not use markdown formatting like ** or ##
+9. Ensure options are complete sentences or code, not single words when possible
 
 Generate {num_questions} questions now following this exact format:"""
     
-    response_text = call_openrouter(prompt, temperature=0.8, max_tokens=3000)
+    response_text = call_openrouter(prompt, temperature=0.8, max_tokens=4000)
     
     if not response_text:
         print("No response from LLM, using fallback")
