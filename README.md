@@ -7,7 +7,7 @@
 
 **ALGOPro** is an intelligent learning platform that transforms how students master Data Structures and Algorithms through AI-generated personalized content, adaptive quizzes, and real-time assistance.
 
-![Platform Screenshot]("website.png")
+![Platform Screenshot](website.png)
 
 ## 🎯 Problem Statement
 
