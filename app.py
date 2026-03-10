@@ -33,7 +33,7 @@ QUIZ_TEMPLATES = load_quiz_templates()
 def get_topic_by_id(topic_id):
     return next((t for t in DSA_CONTENT['topics'] if t['id'] == topic_id), None)
 
-def call_openrouter(prompt, temperature=0.9, max_tokens=8000):
+def call_openrouter(prompt, temperature=0.9, max_tokens=7000):
     """Call OpenRouter API with OpenAI GPT-OSS-120B"""
     if not OPENROUTER_API_KEY:
         return None
