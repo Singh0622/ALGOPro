@@ -252,15 +252,17 @@ function explainQuestion(index) {
             difficulty: 'intermediate'
         })
     })
-    .then(function(r) { return r.json(); })
-    .then(function(data) {
+    .then(r => {
+        if (!r.ok) return r.text().then(t => { throw new Error(t || r.statusText); });
+        return r.json();
+    })
+    .then(data => {
         box.innerHTML = '<div class="ai-explanation-content">' + data.explanation + '</div>';
     })
-    .catch(function() {
-        box.innerHTML = '<div class="text-danger">Failed to load explanation.</div>';
+    .catch(err => {
+        box.innerHTML = '<div class="text-danger">Failed to load explanation: ' + err.message + '</div>';
     });
 }
-
 // ==========================================
 // SUBMIT QUIZ
 // ==========================================
